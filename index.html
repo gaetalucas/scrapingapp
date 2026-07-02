@@ -3,258 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pulso · Mockup v2 — Marca / Resellers</title>
+<title>Pulso · Mockup v3 — Dashboard PVP + Biblioteca</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <script>
-tailwind.config = {
-  theme: { extend: {
-    fontFamily: { sans: ['Inter','system-ui','sans-serif'], display: ['"Space Grotesk"','Inter','sans-serif'] },
-    colors: {
-      ink: { 900:'#0C141C', 800:'#11202E', 700:'#1B3142', 600:'#27475C' },
-      brand: { 600:'#0E8F8E', 500:'#12A6A4', 400:'#3FC0BE', 100:'#D7F2F1' },
-    },
-  }},
-};
+tailwind.config = { theme: { extend: {
+  fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['"Space Grotesk"','Inter','sans-serif'] },
+  colors: { ink:{900:'#0C141C',800:'#11202E',700:'#1B3142',600:'#27475C'}, brand:{600:'#0E8F8E',500:'#12A6A4',400:'#3FC0BE',100:'#D7F2F1'} },
+}}};
 </script>
 <style>
-  .nums { font-variant-numeric: tabular-nums; letter-spacing:-0.01em; }
-  .view { display:none; } .view.active { display:block; }
-  .subtab.active { color:#0E8F8E; border-color:#12A6A4; }
-  .nav-item.active { background:rgba(255,255,255,.08); color:#fff; }
-  .nav-item.active .nav-ic { color:#3FC0BE; }
-  .child-rows { display:none; } .child-rows.open { display:table-row-group; }
-  .chev { transition:transform .15s; } .chev.open { transform:rotate(180deg); }
-  ::-webkit-scrollbar { width:10px; height:10px; } ::-webkit-scrollbar-thumb { background:#d6dbe0; border-radius:6px; }
-  .modal-wrap { display:none; } .modal-wrap.open { display:flex; }
-  @media (max-width: 860px) {
-    #sidebar { position:fixed; left:0; top:0; bottom:0; z-index:40; transform:translateX(-100%); transition:transform .2s; }
-    #sidebar.open { transform:translateX(0); }
-    #hamb { display:flex !important; }
-  }
+  .nums{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .view{display:none}.view.active{display:block}
+  .nav-item.active{background:rgba(255,255,255,.08);color:#fff}.nav-item.active .nav-ic{color:#3FC0BE}
+  .subtab.active{color:#0E8F8E;border-color:#12A6A4}
+  .child-rows{display:none}.child-rows.open{display:table-row-group}
+  .chev{transition:transform .15s}.chev.open{transform:rotate(180deg)}
+  #dashwrap{transition:opacity .15s}
+  ::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-thumb{background:#d6dbe0;border-radius:6px}
+  .modal-wrap{display:none}.modal-wrap.open{display:flex}
+  @media(max-width:900px){#sidebar{position:fixed;left:0;top:0;bottom:0;z-index:40;transform:translateX(-100%);transition:transform .2s}#sidebar.open{transform:translateX(0)}#hamb{display:flex!important}}
 </style>
 </head>
 <body class="bg-slate-50 text-ink-900 font-sans antialiased">
 <div class="flex min-h-screen">
 
-  <!-- ================= SIDEBAR ================= -->
+  <!-- SIDEBAR -->
   <aside id="sidebar" class="w-60 shrink-0 bg-ink-900 text-slate-300 flex flex-col">
     <div class="px-5 py-5 flex items-center gap-2.5 border-b border-white/5">
-      <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C141C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg>
-      </div>
-      <div><div class="font-display font-bold text-white text-lg leading-none tracking-tight">Pulso</div>
-      <div class="text-[11px] text-slate-500 mt-0.5">Inteligencia de precios</div></div>
+      <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0C141C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
+      <div><div class="font-display font-bold text-white text-lg leading-none tracking-tight">Pulso</div><div class="text-[11px] text-slate-500 mt-0.5">Inteligencia de precios</div></div>
     </div>
-
     <nav class="flex-1 px-3 py-4 text-sm overflow-y-auto">
-      <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2">Crear / configurar</div>
-      <button data-view="biblioteca" onclick="nav(this)" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Biblioteca</button>
-      <button data-view="sellers" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01"/></svg>
-        Sellers</button>
+      <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2">Leer / analizar</div>
+      <button data-view="tablero" onclick="nav(this)" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>Tablero</button>
+      <button data-view="seguimiento" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>Seguimiento</button>
+      <button data-view="alertas" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Alertas <span class="ml-auto text-[11px] bg-red-500 text-white rounded-full px-1.5 py-0.5 font-semibold">2</span></button>
 
-      <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2 mt-5">Leer / analizar</div>
-      <button data-view="tablero" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
-        Tablero</button>
-      <button data-view="seguimiento" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
-        Seguimiento de precios</button>
-      <button data-view="alertas" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        Alertas <span class="ml-auto text-[11px] bg-red-500 text-white rounded-full px-1.5 py-0.5 font-semibold">2</span></button>
-      <button data-view="placeholder" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1">
-        <svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>
-        Reportes</button>
+      <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2 mt-5">Crear / configurar</div>
+      <button data-view="biblioteca" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Biblioteca</button>
+      <button data-view="sellers" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Sellers</button>
     </nav>
-
-    <div class="px-4 py-4 border-t border-white/5">
-      <div class="text-[11px] text-slate-500 mb-1">Plan actual</div>
-      <div class="flex items-center justify-between"><span class="text-sm text-white font-medium">Pro / MAP</span><span class="text-[11px] text-brand-400">Módulo MAP activo</span></div>
-    </div>
+    <div class="px-4 py-4 border-t border-white/5"><div class="text-[11px] text-slate-500 mb-1">Plan actual</div><div class="flex items-center justify-between"><span class="text-sm text-white font-medium">Pro / MAP</span><span class="text-[11px] text-brand-400">Módulo MAP activo</span></div></div>
   </aside>
 
-  <!-- ================= MAIN ================= -->
+  <!-- MAIN -->
   <div class="flex-1 flex flex-col min-w-0">
     <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-5 md:px-7 shrink-0">
       <div class="flex items-center gap-3">
-        <button id="hamb" onclick="document.getElementById('sidebar').classList.toggle('open')" class="hidden w-9 h-9 rounded-lg border border-slate-200 items-center justify-center text-slate-500">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-        </button>
-        <div class="w-8 h-8 rounded-lg bg-ink-800 text-white flex items-center justify-center text-xs font-bold">W</div>
-        <div><div class="text-sm font-semibold leading-none">Whirlpool Argentina</div>
-        <div class="text-[11px] text-slate-400 mt-0.5">Cuenta de demostración · marca</div></div>
+        <button id="hamb" onclick="document.getElementById('sidebar').classList.toggle('open')" class="hidden w-9 h-9 rounded-lg border border-slate-200 items-center justify-center text-slate-500"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+        <div class="w-8 h-8 rounded-lg bg-ink-800 text-white flex items-center justify-center text-xs font-bold">S</div>
+        <div><div class="text-sm font-semibold leading-none">Samsung Argentina</div><div class="text-[11px] text-slate-400 mt-0.5">Cuenta de demostración · marca</div></div>
       </div>
-      <div class="flex items-center gap-5">
-        <div class="hidden md:flex items-center gap-2 text-[13px] text-slate-500"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Última corrida: hoy 09:14</div>
-        <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold">LM</div>
-      </div>
+      <div class="flex items-center gap-5"><div class="hidden md:flex items-center gap-2 text-[13px] text-slate-500"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Scraping activo</div><div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs font-bold">LM</div></div>
     </header>
 
     <main class="flex-1 overflow-y-auto p-5 md:p-7">
 
-      <!-- =============== BIBLIOTECA =============== -->
-      <section id="view-biblioteca" class="view active">
-        <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
+      <!-- ================= TABLERO / DASHBOARD PVP ================= -->
+      <section id="view-tablero" class="view active">
+        <!-- Sección 1: encabezado + filtro -->
+        <div class="flex items-start justify-between mb-5 flex-wrap gap-4">
           <div>
-            <h1 class="font-display text-2xl font-bold tracking-tight">Biblioteca</h1>
-            <p class="text-sm text-slate-500 mt-1">El único lugar donde se crean y editan los seguimientos. Cada producto tiene uno o más puntos de captura.</p>
+            <h1 class="font-display text-2xl font-bold tracking-tight">Panel de cumplimiento de PVP sugerido</h1>
+            <div class="flex items-center gap-x-4 gap-y-1 mt-2 text-[13px] text-slate-500 flex-wrap">
+              <span>Última captura: <b class="text-ink-900">hoy 07:42 hs</b></span><span class="text-slate-300">·</span>
+              <span id="hoy-fecha"></span><span class="text-slate-300">·</span>
+              <span>Tolerancia: <b class="text-ink-900">±3%</b></span>
+              <span class="flex items-center gap-1.5 ml-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Sistema OK</span>
+            </div>
+            <div class="flex items-center gap-2 mt-2" id="thr-badges"></div>
           </div>
-          <button onclick="openModal('modal-seguimiento')" class="flex items-center gap-2 bg-ink-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-ink-700">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo seguimiento</button>
+          <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm">
+            <span class="text-slate-500">Línea de producto:</span>
+            <select id="cat-filter" onchange="renderDash()" class="bg-transparent text-ink-900 font-medium outline-none cursor-pointer"></select>
+          </div>
         </div>
 
-        <!-- Subtabs -->
-        <div class="flex items-center gap-6 border-b border-slate-200 mb-5 text-sm">
-          <button onclick="bibTab('seguimientos', this)" class="subtab active pb-2.5 border-b-2 font-medium -mb-px">Seguimientos</button>
-          <button onclick="bibTab('historial', this)" class="subtab pb-2.5 border-b-2 border-transparent text-slate-500 font-medium -mb-px">Historial de cambios</button>
-        </div>
-
-        <!-- --- Tab seguimientos --- -->
-        <div id="bib-seguimientos">
-          <div class="flex items-center gap-3 mb-4 flex-wrap">
-            <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-500 w-64">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Buscar producto o SKU…</div>
-            <div class="flex items-center gap-1.5 text-[13px] text-slate-500 ml-auto bg-white border border-slate-200 rounded-lg px-3 py-2">
-              Estado de captura:
-              <span class="flex items-center gap-1 ml-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>OK</span>
-              <span class="flex items-center gap-1 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>Desvío</span>
-              <span class="flex items-center gap-1 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>Falla</span>
+        <div id="dashwrap">
+          <!-- Sección 2: severity strip -->
+          <div id="sev-strip" class="rounded-xl border p-4 mb-5 flex items-center justify-between flex-wrap gap-4">
+            <div class="flex items-center gap-3"><div id="sev-icon" class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"></div><div><div id="sev-label" class="font-semibold"></div><div id="sev-sub" class="text-[12px] text-slate-500"></div></div></div>
+            <div class="flex items-center gap-0 text-center">
+              <div class="px-4"><div id="c-crit" class="nums font-display text-2xl font-bold text-red-600">0</div><div class="text-[11px] uppercase tracking-wide text-slate-500">Críticos</div></div>
+              <div class="w-px h-9 bg-slate-200"></div>
+              <div class="px-4"><div id="c-mod" class="nums font-display text-2xl font-bold text-amber-600">0</div><div class="text-[11px] uppercase tracking-wide text-slate-500">Moderados</div></div>
+              <div class="w-px h-9 bg-slate-200"></div>
+              <div class="px-4"><div id="c-leve" class="nums font-display text-2xl font-bold text-yellow-600">0</div><div class="text-[11px] uppercase tracking-wide text-slate-500">Leves</div></div>
+              <div class="w-px h-9 bg-slate-200"></div>
+              <div class="px-4"><div id="c-nuevo" class="nums font-display text-2xl font-bold text-ink-900">0</div><div class="text-[11px] uppercase tracking-wide text-slate-500">Nuevos hoy</div></div>
             </div>
           </div>
 
+          <!-- Sección 3: KPIs macro -->
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-5">
+            <div class="lg:col-span-2 bg-white rounded-xl border border-slate-200 p-5">
+              <div class="text-[13px] text-slate-500">Cumplimiento global</div>
+              <div class="flex items-end justify-between gap-4 mt-1">
+                <div><div class="flex items-baseline gap-2"><span id="k-cumpl" class="nums font-display text-4xl font-bold">0%</span><span id="k-var" class="text-[13px] font-semibold"></span></div><div id="k-cumpl-sub" class="text-[12px] text-slate-500 mt-1"></div></div>
+                <div id="k-spark" class="shrink-0"></div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500 mb-2">Desvíos por plataforma</div><div id="k-plats" class="space-y-1.5 text-[13px]"></div></div>
+            <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Sellers en desvío</div><div id="k-sellers" class="nums font-display text-3xl font-bold mt-1"></div><div class="mt-3 pt-3 border-t border-slate-100"><div class="text-[13px] text-slate-500">SKUs afectados</div><div id="k-skus" class="nums font-display text-2xl font-bold mt-0.5"></div></div></div>
+          </div>
+
+          <!-- Sección 4: Pareto -->
+          <div id="pareto-card" class="bg-white rounded-xl border border-slate-200 p-5 mb-5">
+            <div class="text-sm font-semibold mb-3">Concentración de desvíos</div>
+            <div class="h-4 bg-slate-100 rounded-full overflow-hidden"><div id="pareto-bar" class="h-full bg-red-500 rounded-full transition-all" style="width:0%"></div></div>
+            <div id="pareto-pct" class="nums text-[13px] font-semibold mt-2"></div>
+            <div id="pareto-desc" class="text-[13px] text-slate-500 mt-1"></div>
+          </div>
+
+          <!-- Sección 5: tablas detalle -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-3.5 border-b border-slate-200 text-sm font-semibold">Sellers con desvíos activos</div>
+              <table class="w-full text-sm"><thead><tr class="text-left text-[11px] uppercase tracking-wide text-slate-400 border-b border-slate-100"><th class="px-5 py-2.5 font-medium">Seller / Plataforma</th><th class="px-3 py-2.5 font-medium text-right">Desvío</th><th class="px-5 py-2.5 font-medium text-right">Días · Frec.</th></tr></thead><tbody id="t-sellers" class="divide-y divide-slate-100"></tbody></table>
+            </div>
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+              <div class="px-5 py-3.5 border-b border-slate-200 text-sm font-semibold">SKUs más incumplidos</div>
+              <table class="w-full text-sm"><thead><tr class="text-left text-[11px] uppercase tracking-wide text-slate-400 border-b border-slate-100"><th class="px-5 py-2.5 font-medium">SKU · Línea · Sellers</th><th class="px-5 py-2.5 font-medium text-right">Cant.</th></tr></thead><tbody id="t-skus" class="divide-y divide-slate-100"></tbody></table>
+            </div>
+          </div>
+
+          <!-- Sección 6: KPIs secundarios -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+            <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Re-incidentes ≥3 días</div><div id="s-reinc" class="nums font-display text-2xl font-bold mt-1"></div><div id="s-reinc-sub" class="text-[11px] text-slate-400 mt-0.5"></div></div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Racha máxima activa</div><div id="s-racha" class="nums font-display text-2xl font-bold mt-1"></div><div id="s-racha-sub" class="text-[11px] text-slate-400 mt-0.5"></div></div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Cobertura de scraping</div><div id="s-cob" class="nums font-display text-2xl font-bold mt-1"></div><div class="text-[11px] text-slate-400 mt-0.5">de URLs OK</div></div>
+            <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Correcciones hoy</div><div id="s-corr" class="nums font-display text-2xl font-bold mt-1"></div><div id="s-corr-sub" class="text-[11px] text-slate-400 mt-0.5"></div></div>
+          </div>
+
+          <!-- Sección 7: leyenda -->
+          <div class="border-t border-slate-200 pt-4 flex items-start justify-between flex-wrap gap-3 text-[12px] text-slate-500">
+            <div class="flex items-center gap-3 flex-wrap" id="legend"></div>
+            <div>Días · Frec. = días consecutivos en incumplimiento · veces en 30 días</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= BIBLIOTECA (v3) ================= -->
+      <section id="view-biblioteca" class="view">
+        <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
+          <div><h1 class="font-display text-2xl font-bold tracking-tight">Biblioteca</h1><p class="text-sm text-slate-500 mt-1">El único lugar donde se crean y editan los seguimientos. Acá no se ven precios ni métricas: eso vive en Seguimiento.</p></div>
+          <div class="flex items-center gap-2">
+            <button onclick="openModal('modal-seguimiento')" class="flex items-center gap-2 bg-ink-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-ink-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Crear seguimiento</button>
+            <button class="flex items-center gap-2 border border-slate-200 bg-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-50 text-slate-600"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="5" rx="1"/><path d="M4 9v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9M10 13h4"/></svg>Archivados</button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-6 border-b border-slate-200 mb-5 text-sm">
+          <button onclick="bibTab('seg', this)" class="subtab active pb-2.5 border-b-2 font-medium -mb-px">Seguimientos</button>
+          <button onclick="bibTab('hist', this)" class="subtab pb-2.5 border-b-2 border-transparent text-slate-500 font-medium -mb-px">Historial de cambios</button>
+        </div>
+
+        <div id="bib-seg">
+          <div class="flex items-center gap-3 mb-4 flex-wrap">
+            <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-500 w-64"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Buscar producto o SKU…</div>
+            <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-500"><span>Categoría:</span><select class="bg-transparent text-ink-900 font-medium outline-none cursor-pointer"><option>Todas</option><option>Smartphones</option><option>Televisores</option><option>Audio</option><option>Electrohogar</option></select></div>
+            <div class="flex items-center gap-1.5 text-[13px] text-slate-500 ml-auto"><span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>OK</span><span class="flex items-center gap-1 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>Desvío</span><span class="flex items-center gap-1 ml-2"><span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>Falla</span></div>
+          </div>
           <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-            <table class="w-full text-sm min-w-[860px]">
+            <table class="w-full text-sm min-w-[900px]">
               <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-                <th class="pl-5 pr-2 py-3 font-medium w-8"></th>
-                <th class="px-2 py-3 font-medium">Producto</th>
+                <th class="pl-4 pr-1 py-3 font-medium w-6"></th>
+                <th class="px-3 py-3 font-medium">Acciones</th>
+                <th class="px-2 py-3 font-medium text-center">Estado</th>
+                <th class="px-3 py-3 font-medium">Producto</th>
                 <th class="px-3 py-3 font-medium">SKU</th>
+                <th class="px-3 py-3 font-medium">Categoría</th>
                 <th class="px-3 py-3 font-medium">Seller</th>
                 <th class="px-3 py-3 font-medium">Plataforma</th>
                 <th class="px-3 py-3 font-medium text-right">PVP sugerido</th>
-                <th class="px-3 py-3 font-medium text-right">Último precio</th>
-                <th class="px-3 py-3 font-medium">Captura</th>
-                <th class="px-5 py-3 font-medium text-right">Acciones</th>
+                <th class="px-5 py-3 font-medium">Captura</th>
               </tr></thead>
-              <tbody id="bib-body" class="text-sm"></tbody>
+              <tbody id="bib-body"></tbody>
             </table>
           </div>
-          <p class="text-[12px] text-slate-400 mt-3">El punto verde/amarillo/rojo indica la salud del scraping (no el cumplimiento de precio). Editá tanto el producto (padre) como cada punto de captura (hijo).</p>
+          <p class="text-[12px] text-slate-400 mt-3">El punto de color es la salud del scraping (no el cumplimiento de precio). La campana activa/desactiva una alerta para esa línea. Se edita tanto el producto (padre) como cada punto de captura (hijo).</p>
         </div>
 
-        <!-- --- Tab historial --- -->
-        <div id="bib-historial" class="hidden">
+        <div id="bib-hist" class="hidden">
           <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-            <table class="w-full text-sm min-w-[720px]">
-              <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-                <th class="px-5 py-3 font-medium">Fecha</th><th class="px-3 py-3 font-medium">Usuario</th>
-                <th class="px-3 py-3 font-medium">Acción</th><th class="px-3 py-3 font-medium">Detalle</th></tr></thead>
+            <table class="w-full text-sm min-w-[720px]"><thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200"><th class="px-5 py-3 font-medium">Fecha</th><th class="px-3 py-3 font-medium">Usuario</th><th class="px-3 py-3 font-medium">Acción</th><th class="px-3 py-3 font-medium">Detalle</th></tr></thead>
               <tbody class="divide-y divide-slate-100">
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">30/06 14:22</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-medium">Editó</span></td><td class="px-3 py-3">PVP sugerido de "Heladera Whirlpool 360L": <span class="line-through text-slate-400 nums">$445.000</span> → <span class="font-medium nums">$450.000</span></td></tr>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">30/06 11:05</td><td class="px-3 py-3">Sofía R.</td><td class="px-3 py-3"><span class="text-[12px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Creó</span></td><td class="px-3 py-3">Nuevo seguimiento: Garbarino / VTEX en "Lavarropas Whirlpool 8kg"</td></tr>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">29/06 18:40</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-medium">Pausó</span></td><td class="px-3 py-3">Musimundo / Banco Provincia en "Heladera Whirlpool 360L" (sitio caído)</td></tr>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">28/06 09:12</td><td class="px-3 py-3">Sofía R.</td><td class="px-3 py-3"><span class="text-[12px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-medium">Archivó</span></td><td class="px-3 py-3">Producto "Microondas Whirlpool 20L (línea vieja)"</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">01/07 09:20</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Creó</span></td><td class="px-3 py-3">Seguimiento: Megatone / VTEX en "Neo QLED 65""</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">30/06 14:22</td><td class="px-3 py-3">Sofía R.</td><td class="px-3 py-3"><span class="text-[12px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-medium">Editó</span></td><td class="px-3 py-3">PVP de "Galaxy S24 128GB": <span class="line-through text-slate-400 nums">$1.180.000</span> → <span class="font-medium nums">$1.199.000</span></td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">29/06 18:40</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-medium">Pausó</span></td><td class="px-3 py-3">Musimundo / Mercado Libre en "Galaxy Buds3" (sitio caído)</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">29/06 10:03</td><td class="px-3 py-3">Sofía R.</td><td class="px-3 py-3"><span class="text-[12px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Creó</span></td><td class="px-3 py-3">Producto "Soundbar HW-Q800" con 2 seguimientos (categoría Audio)</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">28/06 16:27</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-medium">Editó</span></td><td class="px-3 py-3">URL de Megatone / VTEX en "Neo QLED 65"" (cambió de dominio)</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">28/06 09:12</td><td class="px-3 py-3">Sofía R.</td><td class="px-3 py-3"><span class="text-[12px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-medium">Archivó</span></td><td class="px-3 py-3">Producto "Galaxy A54 (línea anterior)"</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3 nums text-slate-500">27/06 14:55</td><td class="px-3 py-3">Lucas M.</td><td class="px-3 py-3"><span class="text-[12px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Creó</span></td><td class="px-3 py-3">Alta masiva: 6 productos de la línea Electrohogar vía CSV</td></tr>
               </tbody>
             </table>
           </div>
-          <p class="text-[12px] text-slate-400 mt-3">Registro de auditoría de la configuración: quién cambió qué y cuándo. Distinto del histórico de precios.</p>
+          <p class="text-[12px] text-slate-400 mt-3">Auditoría de configuración: quién cambió qué y cuándo.</p>
         </div>
       </section>
 
-      <!-- =============== SELLERS =============== -->
+      <!-- ================= SELLERS ================= -->
       <section id="view-sellers" class="view">
-        <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
-          <div><h1 class="font-display text-2xl font-bold tracking-tight">Sellers</h1>
-          <p class="text-sm text-slate-500 mt-1">Cargá cada seller una sola vez. En toda la plataforma se elige desde un desplegable, así no hay nombres repetidos ni discrepancias.</p></div>
-          <button onclick="openModal('modal-seller')" class="flex items-center gap-2 bg-ink-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-ink-700">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo seller</button>
-        </div>
+        <div class="flex items-end justify-between mb-5 flex-wrap gap-3"><div><h1 class="font-display text-2xl font-bold tracking-tight">Sellers</h1><p class="text-sm text-slate-500 mt-1">Cada seller se crea una vez y se elige por desplegable en toda la plataforma. Evita duplicados como "Fravega / Frav / Fravega ".</p></div>
+          <button onclick="openModal('modal-seller')" class="flex items-center gap-2 bg-ink-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-ink-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo seller</button></div>
         <div id="sellers-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
       </section>
 
-      <!-- =============== SEGUIMIENTO DE PRECIOS =============== -->
+      <!-- ================= SEGUIMIENTO ================= -->
       <section id="view-seguimiento" class="view">
-        <div class="mb-5"><h1 class="font-display text-2xl font-bold tracking-tight">Seguimiento de precios</h1>
-        <p class="text-sm text-slate-500 mt-1">Compará el PVP sugerido contra lo que publican realmente tus resellers. Vista de solo lectura.</p></div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Cumplimiento general</div><div class="nums font-display text-3xl font-bold mt-2 text-emerald-600">78<span class="text-lg text-slate-400">%</span></div><div class="text-[12px] text-slate-500 mt-1.5">de las publicaciones respeta el PVP</div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Sellers incumpliendo</div><div class="nums font-display text-3xl font-bold mt-2 text-red-600">2</div><div class="text-[12px] text-slate-500 mt-1.5">Garbarino y Musimundo</div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Publicaciones por debajo</div><div class="nums font-display text-3xl font-bold mt-2">5</div><div class="text-[12px] text-slate-500 mt-1.5">con evidencia guardada</div></div>
-        </div>
-
-        <div class="flex items-center gap-3 mb-4 flex-wrap">
-          <span class="text-sm font-medium text-slate-600">Productos a analizar</span>
-          <div class="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm text-slate-500 ml-auto">
-            Seller:
-            <select class="bg-transparent text-ink-900 font-medium outline-none cursor-pointer"><option>Todos</option><option>Frávega</option><option>Garbarino</option><option>Compumundo</option><option>Musimundo</option><option>Naldo</option></select>
-          </div>
-        </div>
-
+        <div class="mb-5"><h1 class="font-display text-2xl font-bold tracking-tight">Seguimiento de precios</h1><p class="text-sm text-slate-500 mt-1">PVP sugerido contra el precio realmente publicado por cada seller. Acá sí se ven los precios.</p></div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-          <table class="w-full text-sm min-w-[820px]">
-            <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-              <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">SKU</th>
-              <th class="px-3 py-3 font-medium">Seller</th><th class="px-3 py-3 font-medium">Plataforma</th>
-              <th class="px-3 py-3 font-medium text-right">PVP sugerido</th><th class="px-3 py-3 font-medium text-right">Precio publicado</th>
-              <th class="px-3 py-3 font-medium text-right">Desvío</th><th class="px-5 py-3 font-medium">Cumplimiento</th></tr></thead>
-            <tbody id="seg-body" class="divide-y divide-slate-100"></tbody>
-          </table>
+          <table class="w-full text-sm min-w-[820px]"><thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200"><th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Categoría</th><th class="px-3 py-3 font-medium">Seller</th><th class="px-3 py-3 font-medium">Plataforma</th><th class="px-3 py-3 font-medium text-right">PVP</th><th class="px-3 py-3 font-medium text-right">Publicado</th><th class="px-3 py-3 font-medium text-right">Desvío</th><th class="px-5 py-3 font-medium">Cumplimiento</th></tr></thead><tbody id="seg-body" class="divide-y divide-slate-100"></tbody></table>
         </div>
-        <p class="text-[12px] text-slate-400 mt-3">"Por debajo" del PVP = incumplimiento. Cada caso guarda captura con fecha y hora como evidencia.</p>
       </section>
 
-      <!-- =============== ALERTAS =============== -->
+      <!-- ================= ALERTAS ================= -->
       <section id="view-alertas" class="view">
-        <div class="mb-5"><h1 class="font-display text-2xl font-bold tracking-tight">Alertas</h1>
-        <p class="text-sm text-slate-500 mt-1">Vos definís las reglas. Cada una registra el evento siempre; vos decidís si además te notifica y con qué frecuencia.</p></div>
-
+        <div class="mb-5"><h1 class="font-display text-2xl font-bold tracking-tight">Alertas</h1><p class="text-sm text-slate-500 mt-1">Cada regla registra siempre el evento; vos decidís si además te notifica, por qué canal y con qué frecuencia.</p></div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div class="lg:col-span-2">
-            <div class="flex items-center justify-between mb-3"><h2 class="font-semibold">Mis reglas</h2>
-              <button class="text-[13px] text-brand-600 font-medium border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50">+ Nueva regla</button></div>
+            <div class="flex items-center justify-between mb-3"><h2 class="font-semibold">Mis reglas</h2><button class="text-[13px] text-brand-600 font-medium border border-slate-200 rounded-lg px-3 py-1.5 hover:bg-slate-50">+ Nueva regla</button></div>
             <div id="rules" class="space-y-3"></div>
           </div>
           <div>
             <h2 class="font-semibold mb-3">Eventos recientes</h2>
             <div class="bg-white rounded-xl border border-slate-200 p-5 space-y-4">
-              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
-                <div><p class="text-[13px] leading-snug"><span class="font-semibold">Musimundo</span> publicó la Heladera 360L un 6,7% debajo del PVP.</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 08:40 · notificado por mail</p></div></div>
-              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
-                <div><p class="text-[13px] leading-snug"><span class="font-semibold">Garbarino</span> incumplió PVP en Lavarropas 8kg.</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 07:12 · en resumen diario</p></div></div>
-              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div>
-                <div><p class="text-[13px] leading-snug">Captura con error (404) en Musimundo / Banco Provincia.</p><p class="text-[12px] text-slate-400 mt-0.5">Ayer 22:00 · solo registrado</p></div></div>
+              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div><div><p class="text-[13px] leading-snug"><span class="font-semibold">Frávega</span> publicó el Neo QLED 55" un 17% debajo del PVP.</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 07:42 · notificado por mail</p></div></div>
+              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-red-100 text-red-600 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div><div><p class="text-[13px] leading-snug"><span class="font-semibold">Nuevo hoy:</span> Frávega (ML) incumple en Neo QLED 65".</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 07:42 · notificado por mail</p></div></div>
+              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/></svg></div><div><p class="text-[13px] leading-snug"><span class="font-semibold">Garbarino</span> por debajo del PVP en Galaxy S24 (leve).</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 07:12 · en resumen diario</p></div></div>
+              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div><div><p class="text-[13px] leading-snug"><span class="font-semibold">Naldo</span> volvió al rango de PVP en Neo QLED 65".</p><p class="text-[12px] text-slate-400 mt-0.5">Hoy 06:20 · corrección</p></div></div>
+              <div class="flex gap-3"><div class="w-8 h-8 rounded-lg bg-slate-100 text-slate-500 flex items-center justify-center shrink-0"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div><div><p class="text-[13px] leading-snug">Captura con error (404) en Galaxy Buds3 / Musimundo.</p><p class="text-[12px] text-slate-400 mt-0.5">Ayer 22:00 · solo registrado</p></div></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- =============== TABLERO =============== -->
-      <section id="view-tablero" class="view">
-        <div class="mb-5"><h1 class="font-display text-2xl font-bold tracking-tight">Tablero</h1>
-        <p class="text-sm text-slate-500 mt-1">Cómo vienen tus resellers respecto al PVP sugerido, de un vistazo.</p></div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Cumplimiento PVP</div><div class="nums font-display text-3xl font-bold mt-2 text-emerald-600">78<span class="text-lg text-slate-400">%</span></div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Sellers monitoreados</div><div class="nums font-display text-3xl font-bold mt-2">5</div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Capturas con falla</div><div class="nums font-display text-3xl font-bold mt-2 text-red-600">1</div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="text-[13px] text-slate-500">Alertas activas</div><div class="nums font-display text-3xl font-bold mt-2">2</div></div>
-        </div>
-        <div class="bg-white rounded-xl border border-slate-200 p-6">
-          <h2 class="font-semibold mb-4">Cumplimiento por seller</h2>
-          <div id="seller-bars" class="space-y-3"></div>
-        </div>
-      </section>
-
-      <!-- =============== PLACEHOLDER =============== -->
-      <section id="view-placeholder" class="view">
-        <div class="bg-white rounded-xl border border-dashed border-slate-300 p-16 text-center">
-          <h2 class="font-semibold text-lg">Reportes — por diseñar</h2>
-          <p class="text-sm text-slate-500 mt-1 max-w-md mx-auto">Reportes agrupados por seller y categoría, exportables a Excel/PDF. Los definimos en la próxima etapa.</p>
         </div>
       </section>
 
@@ -262,228 +245,296 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- ================= MODAL: NUEVO SEGUIMIENTO ================= -->
+<!-- MODAL seguimiento -->
 <div id="modal-seguimiento" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-seguimiento')">
   <div class="bg-white rounded-2xl w-full max-w-lg p-6 shadow-xl">
-    <div class="flex items-center justify-between mb-1"><h3 class="font-display text-xl font-bold">Nuevo seguimiento</h3>
-      <button onclick="closeModal('modal-seguimiento')" class="text-slate-400 hover:text-ink-900"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-    <p class="text-[13px] text-slate-500 mb-5">Cargá el producto y el punto de captura del reseller.</p>
+    <div class="flex items-center justify-between mb-1"><h3 class="font-display text-xl font-bold">Crear seguimiento</h3><button onclick="closeModal('modal-seguimiento')" class="text-slate-400 hover:text-ink-900"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <p class="text-[13px] text-slate-500 mb-5">Producto y punto de captura del reseller.</p>
     <div class="space-y-4">
-      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Nombre del ítem</label><input type="text" placeholder="Heladera Whirlpool No Frost 360L" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">SKU</label><input type="text" placeholder="WHE-360NF" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
-        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">PVP sugerido</label><input type="text" placeholder="$450.000" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
+      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Nombre del ítem</label><input placeholder="Neo QLED 55" 4K" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
+      <div class="grid grid-cols-3 gap-4">
+        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">SKU</label><input placeholder="QN55" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
+        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Categoría</label><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>Smartphones</option><option>Televisores</option><option>Audio</option><option>Electrohogar</option><option class="text-brand-600">+ Nueva categoría</option></select></div>
+        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">PVP sugerido</label><input placeholder="$1.450.000" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
       </div>
       <div class="grid grid-cols-2 gap-4">
-        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Seller</label>
-          <select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>Elegí un seller…</option><option>Frávega</option><option>Garbarino</option><option>Compumundo</option><option>Musimundo</option><option>Naldo</option><option class="text-brand-600">+ Crear nuevo seller</option></select>
-          <p class="text-[11px] text-slate-400 mt-1">Se elige de la lista, no se escribe a mano.</p></div>
-        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Plataforma</label>
-          <select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>VTEX</option><option>Mercado Libre</option><option>Tienda propia</option><option>Banco Provincia</option></select></div>
+        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Seller</label><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>Elegí un seller…</option><option>Frávega</option><option>Garbarino</option><option>Compumundo</option><option>Musimundo</option><option>Megatone</option><option>Naldo</option><option class="text-brand-600">+ Crear nuevo seller</option></select></div>
+        <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Plataforma</label><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>VTEX</option><option>Mercado Libre</option><option>Tienda propia</option><option>Shopify</option></select></div>
       </div>
-      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">URL del seller</label><input type="text" placeholder="https://www.fravega.com/p/heladera-whirlpool…" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
-      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Frecuencia de captura</label>
-        <select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500 bg-white"><option>Diaria</option><option>Cada 6 horas</option><option>Cada hora</option><option>Semanal</option></select></div>
+      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">URL del seller</label><input placeholder="https://www.fravega.com/p/…" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
+      <div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2.5"><div class="flex items-center gap-2 text-sm text-slate-600"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>Crear alerta para esta línea</div><span class="w-10 rounded-full relative bg-brand-500" style="height:22px"><span class="absolute top-0.5 w-[18px] h-[18px] bg-white rounded-full" style="right:2px"></span></span></div>
     </div>
-    <div class="flex gap-3 mt-6"><button onclick="closeModal('modal-seguimiento')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium hover:bg-slate-50">Cancelar</button>
-      <button onclick="closeModal('modal-seguimiento')" class="flex-1 bg-ink-800 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-ink-700">Guardar seguimiento</button></div>
+    <div class="flex gap-3 mt-6"><button onclick="closeModal('modal-seguimiento')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium hover:bg-slate-50">Cancelar</button><button onclick="closeModal('modal-seguimiento')" class="flex-1 bg-ink-800 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-ink-700">Guardar</button></div>
   </div>
 </div>
-
-<!-- ================= MODAL: NUEVO SELLER ================= -->
+<!-- MODAL seller -->
 <div id="modal-seller" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-seller')">
   <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl">
-    <div class="flex items-center justify-between mb-1"><h3 class="font-display text-xl font-bold">Nuevo seller</h3>
-      <button onclick="closeModal('modal-seller')" class="text-slate-400 hover:text-ink-900"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-    <p class="text-[13px] text-slate-500 mb-5">Se crea una sola vez y queda disponible en toda la plataforma.</p>
-    <div class="space-y-4">
-      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Nombre del seller</label><input type="text" placeholder="Frávega" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
-      <div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Sitio principal (opcional)</label><input type="text" placeholder="https://www.fravega.com" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div>
-    </div>
-    <div class="flex gap-3 mt-6"><button onclick="closeModal('modal-seller')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium hover:bg-slate-50">Cancelar</button>
-      <button onclick="closeModal('modal-seller')" class="flex-1 bg-ink-800 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-ink-700">Crear seller</button></div>
+    <div class="flex items-center justify-between mb-1"><h3 class="font-display text-xl font-bold">Nuevo seller</h3><button onclick="closeModal('modal-seller')" class="text-slate-400 hover:text-ink-900"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <p class="text-[13px] text-slate-500 mb-5">Se crea una vez y queda disponible en toda la plataforma.</p>
+    <div class="space-y-4"><div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Nombre del seller</label><input placeholder="Frávega" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div><div><label class="block text-[13px] font-medium text-slate-600 mb-1.5">Sitio principal (opcional)</label><input placeholder="https://www.fravega.com" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-brand-500"></div></div>
+    <div class="flex gap-3 mt-6"><button onclick="closeModal('modal-seller')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium hover:bg-slate-50">Cancelar</button><button onclick="closeModal('modal-seller')" class="flex-1 bg-ink-800 text-white rounded-lg py-2.5 text-sm font-medium hover:bg-ink-700">Crear seller</button></div>
   </div>
 </div>
 
 <script>
-/* ---------- navigation ---------- */
-function nav(el){
-  const v = el.dataset.view;
-  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
-  document.getElementById('view-'+v).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelector('main').scrollTop=0;
-  document.getElementById('sidebar').classList.remove('open');
+/* ---------- nav / tabs / modal ---------- */
+function nav(el){const v=el.dataset.view;document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById('view-'+v).classList.add('active');document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');document.querySelector('main').scrollTop=0;document.getElementById('sidebar').classList.remove('open');}
+function bibTab(t,el){document.getElementById('bib-seg').classList.toggle('hidden',t!=='seg');document.getElementById('bib-hist').classList.toggle('hidden',t!=='hist');document.querySelectorAll('.subtab').forEach(s=>{s.classList.remove('active');s.classList.add('text-slate-500','border-transparent');});el.classList.add('active');el.classList.remove('text-slate-500','border-transparent');}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+const fmt=n=>n==null?'—':'$'+n.toLocaleString('es-AR');
+
+/* ================= CONFIG + DATA ================= */
+const CFG={tol:3,mod:5,crit:15};
+const CATS=['Smartphones','Televisores','Audio','Electrohogar'];
+const P={ // productos
+  'SM-S24':{n:'Galaxy S24 128GB',c:'Smartphones',pvp:1199000},
+  'SM-A55':{n:'Galaxy A55',c:'Smartphones',pvp:649000},
+  'QN55':{n:'Neo QLED 55"',c:'Televisores',pvp:1450000},
+  'QN65':{n:'Neo QLED 65"',c:'Televisores',pvp:2300000},
+  'HWQ':{n:'Soundbar HW-Q800',c:'Audio',pvp:520000},
+  'BUDS':{n:'Galaxy Buds3',c:'Audio',pvp:210000},
+  'RF27':{n:'Heladera French Door',c:'Electrohogar',pvp:1890000},
+  'WW90':{n:'Lavarropas 9kg',c:'Electrohogar',pvp:780000},
+};
+// registros de captura (sku, seller, plataforma, precio publicado, promo, scrapeOK)
+const REC=[
+  ['QN55','Frávega','VTEX',1200000,true,true],
+  ['QN55','Garbarino','VTEX',1300000,false,true],
+  ['QN55','Musimundo','Mercado Libre',1247000,false,true],
+  ['QN65','Frávega','Mercado Libre',1900000,false,true],
+  ['QN65','Megatone','VTEX',2150000,false,true],
+  ['QN65','Naldo','VTEX',2250000,false,true],
+  ['SM-S24','Frávega','VTEX',1199000,false,true],
+  ['SM-S24','Garbarino','VTEX',1150000,false,true],
+  ['SM-S24','Musimundo','Mercado Libre',1199000,false,true],
+  ['SM-S24','Naldo','VTEX',1199000,false,true],
+  ['SM-A55','Frávega','VTEX',649000,false,true],
+  ['SM-A55','Compumundo','Tienda propia',645000,false,true],
+  ['SM-A55','Megatone','VTEX',649000,false,true],
+  ['HWQ','Frávega','VTEX',470000,true,true],
+  ['HWQ','Musimundo','Mercado Libre',510000,false,true],
+  ['BUDS','Garbarino','VTEX',189000,false,true],
+  ['BUDS','Musimundo','Mercado Libre',null,false,false],
+  ['RF27','Frávega','VTEX',1890000,false,true],
+  ['RF27','Megatone','VTEX',1850000,false,true],
+  ['WW90','Compumundo','Tienda propia',780000,false,true],
+].map(([sku,seller,plat,precio,promo,ok])=>({sku,seller,plat,precio,promo,ok}));
+// metadata por seller-entity (seller|plataforma): días consec., veces/30d, nuevo hoy, corrigió hoy
+const M={
+  'Frávega|VTEX':{d:6,v:8,nuevo:false,corr:false},
+  'Frávega|Mercado Libre':{d:2,v:3,nuevo:true,corr:false},
+  'Garbarino|VTEX':{d:4,v:5,nuevo:false,corr:false},
+  'Musimundo|Mercado Libre':{d:1,v:2,nuevo:true,corr:false},
+  'Megatone|VTEX':{d:3,v:4,nuevo:false,corr:false},
+  'Compumundo|Tienda propia':{d:0,v:0,nuevo:false,corr:false},
+  'Naldo|VTEX':{d:0,v:1,nuevo:false,corr:true},
+};
+const AYER={todas:25,Smartphones:83,Televisores:33,Audio:33,Electrohogar:100};
+const SPARK={todas:[35,32,30,27,25,25,29],Smartphones:[80,82,83,83,85,83,84],Televisores:[55,50,45,40,35,33,17],Audio:[42,40,38,35,33,33,33],Electrohogar:[95,97,100,100,100,100,100]};
+
+const sevRank={leve:1,moderado:2,critico:3};
+const sevOf=d=>d>CFG.crit?'critico':d>CFG.mod?'moderado':d>CFG.tol?'leve':null;
+const desvOf=r=>r.precio==null?null:(P[r.sku].pvp-r.precio)/P[r.sku].pvp*100;
+const key=r=>r.seller+'|'+r.plat;
+
+function compute(cat){
+  let recs=REC.filter(r=>cat==='todas'||P[r.sku].c===cat);
+  const enD=recs.filter(r=>{const d=desvOf(r);return d!=null&&sevOf(d);});
+  const allS=[...new Set(recs.map(key))];
+  const dS=[...new Set(enD.map(key))];
+  const cumpl=allS.length?Math.round((allS.length-dS.length)/allS.length*100):100;
+  const crit=enD.filter(r=>sevOf(desvOf(r))==='critico').length;
+  const mod=enD.filter(r=>sevOf(desvOf(r))==='moderado').length;
+  const leve=enD.filter(r=>sevOf(desvOf(r))==='leve').length;
+  const nuevos=dS.filter(k=>(M[k]||{}).nuevo).length;
+  // plataformas
+  const pm={};
+  recs.forEach(r=>{(pm[r.plat]=pm[r.plat]||{tot:new Set(),desv:new Set(),sev:0});pm[r.plat].tot.add(key(r));});
+  enD.forEach(r=>{pm[r.plat].desv.add(key(r));pm[r.plat].sev=Math.max(pm[r.plat].sev,sevRank[sevOf(desvOf(r))]);});
+  const plats=Object.entries(pm).filter(([,x])=>x.desv.size>0).map(([p,x])=>({p,desv:x.desv.size,tot:x.tot.size,sev:x.sev})).sort((a,b)=>b.sev-a.sev);
+  // sellers table
+  const sellerRows=dS.map(k=>{const rs=enD.filter(r=>key(r)===k);const worst=rs.reduce((a,b)=>sevRank[sevOf(desvOf(b))]>sevRank[sevOf(desvOf(a))]?b:a);const m=M[k]||{d:1,v:1};const[s,pl]=k.split('|');return{s,pl,sev:sevOf(desvOf(worst)),desvio:Math.max(...rs.map(desvOf)),d:m.d,v:m.v,promo:rs.some(r=>r.promo),count:rs.length};}).sort((a,b)=>sevRank[b.sev]-sevRank[a.sev]||b.desvio-a.desvio);
+  // skus table
+  const sm={};enD.forEach(r=>{(sm[r.sku]=sm[r.sku]||{sku:r.sku,n:P[r.sku].n,c:P[r.sku].c,sellers:[]});sm[r.sku].sellers.push({s:r.seller,pl:r.plat,desvio:desvOf(r),sev:sevOf(desvOf(r)),promo:r.promo});});
+  const skuRows=Object.values(sm).sort((a,b)=>b.sellers.length-a.sellers.length);
+  // pareto
+  const cnt={};enD.forEach(r=>{const k=key(r);cnt[k]=(cnt[k]||0)+1;});
+  const ord=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);const tot=enD.length;let acc=0,grp=[];
+  for(const[k,c]of ord){grp.push(k);acc+=c;if(tot&&acc/tot>=0.75)break;}
+  const pareto=(tot>0&&ord.length>1)?{pct:Math.round(acc/tot*100),n:grp.length,sellers:grp.map(k=>{const[s,pl]=k.split('|');return s+' ('+pl+')';})}:null;
+  // secundarios
+  const reinc=dS.filter(k=>(M[k]||{}).d>=3).length;
+  const racha=sellerRows.reduce((a,b)=>(!a||b.d>a.d)?b:a,null);
+  const cob=recs.length?Math.round(recs.filter(r=>r.ok!==false).length/recs.length*100):100;
+  const corr=allS.filter(k=>(M[k]||{}).corr).length;
+  return{cumpl,crit,mod,leve,nuevos,plats,sellerRows,skuRows,pareto,reinc,racha,cob,corr,
+    sellersDesv:dS.length,sellersTot:allS.length,skusDesv:skuRows.length,skusTot:[...new Set(recs.map(r=>r.sku))].length};
 }
-function bibTab(t, el){
-  document.getElementById('bib-seguimientos').classList.toggle('hidden', t!=='seguimientos');
-  document.getElementById('bib-historial').classList.toggle('hidden', t!=='historial');
-  document.querySelectorAll('.subtab').forEach(s=>{s.classList.remove('active'); s.classList.add('text-slate-500','border-transparent');});
-  el.classList.add('active'); el.classList.remove('text-slate-500','border-transparent');
+
+/* ---------- severity styles ---------- */
+const sevBadge={critico:'bg-red-100 text-red-700',moderado:'bg-amber-100 text-amber-700',leve:'bg-yellow-100 text-yellow-700'};
+const sevText={critico:'text-red-600',moderado:'text-amber-600',leve:'text-yellow-600'};
+const sevDotc={3:'bg-red-500',2:'bg-amber-500',1:'bg-yellow-400'};
+const sevLabelTxt={critico:'CRÍTICO',moderado:'MODERADO',leve:'LEVE'};
+
+function spark(data){const w=104,h=34,mn=Math.min(...data),mx=Math.max(...data),rg=(mx-mn)||1;const pts=data.map((v,i)=>[(i/(data.length-1))*w,h-((v-mn)/rg)*(h-8)-4]);const d=pts.map(p=>p.join(',')).join(' ');const last=pts[pts.length-1];return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><polyline points="${d}" fill="none" stroke="#12A6A4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${last[0]}" cy="${last[1]}" r="3" fill="#0E8F8E"/></svg>`;}
+
+function renderDash(){
+  const cat=document.getElementById('cat-filter').value;
+  const w=document.getElementById('dashwrap');w.style.opacity=.5;
+  setTimeout(()=>{ paint(compute(cat)); w.style.opacity=1; },120);
 }
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function paint(x){
+  // severity strip container
+  const strip=document.getElementById('sev-strip'),ic=document.getElementById('sev-icon');
+  let cls,icc,label,sub,iconSvg;
+  const bell='<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>';
+  const check='<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+  const warn='<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>';
+  if(x.crit>0){cls='bg-red-50 border-red-200';icc='bg-red-100 text-red-600';label='Estado de alerta activo';sub='Hay desvíos críticos que requieren atención inmediata.';iconSvg=warn;}
+  else if(x.mod>0){cls='bg-amber-50 border-amber-200';icc='bg-amber-100 text-amber-700';label='Situación a monitorear';sub='Desvíos moderados detectados en la red de sellers.';iconSvg=warn;}
+  else if(x.leve>0){cls='bg-yellow-50 border-yellow-200';icc='bg-yellow-100 text-yellow-700';label='Desvíos leves detectados';sub='Movimientos menores, dentro de lo esperable.';iconSvg=bell;}
+  else{cls='bg-emerald-50 border-emerald-200';icc='bg-emerald-100 text-emerald-700';label='Sin desvíos activos en esta línea';sub='Todos los sellers respetan el PVP sugerido.';iconSvg=check;}
+  strip.className='rounded-xl border p-4 mb-5 flex items-center justify-between flex-wrap gap-4 '+cls;
+  ic.className='w-10 h-10 rounded-lg flex items-center justify-center shrink-0 '+icc;ic.innerHTML=iconSvg;
+  document.getElementById('sev-label').textContent=label;document.getElementById('sev-sub').textContent=sub;
+  document.getElementById('c-crit').textContent=x.crit;document.getElementById('c-mod').textContent=x.mod;document.getElementById('c-leve').textContent=x.leve;document.getElementById('c-nuevo').textContent=x.nuevos;
 
-/* ---------- data ---------- */
-const fmt = n => n==null ? '—' : '$'+n.toLocaleString('es-AR');
-const dot = {ok:'bg-emerald-500', warn:'bg-amber-400', err:'bg-red-500'};
+  // KPI cumplimiento
+  document.getElementById('k-cumpl').textContent=x.cumpl+'%';
+  const cat=document.getElementById('cat-filter').value;const ayer=AYER[cat]!=null?AYER[cat]:AYER.todas;const vr=x.cumpl-ayer;
+  const kv=document.getElementById('k-var');kv.textContent=(vr>0?'▲ +':vr<0?'▼ ':'– ')+Math.abs(vr)+' pp vs ayer';kv.className='text-[13px] font-semibold '+(vr>0?'text-emerald-600':vr<0?'text-red-600':'text-slate-400');
+  document.getElementById('k-cumpl-sub').textContent=x.sellersTot+' sellers · '+x.skusTot+' SKUs monitoreados';
+  document.getElementById('k-spark').innerHTML=spark(SPARK[cat]||SPARK.todas);
 
-const biblioteca = [
-  { prod:'Heladera Whirlpool No Frost 360L', sku:'WHE-360NF', pvp:450000, hijos:[
-    {st:'ok',   seller:'Frávega',   plat:'VTEX',           precio:458000, visto:'hace 2 h'},
-    {st:'ok',   seller:'Frávega',   plat:'Mercado Libre',  precio:449000, visto:'hace 2 h'},
-    {st:'warn', seller:'Naldo',     plat:'VTEX',           precio:455000, visto:'reintentó'},
-    {st:'err',  seller:'Musimundo', plat:'Banco Provincia',precio:null,   visto:'404'},
-  ]},
-  { prod:'Lavarropas Whirlpool 8kg Carga Frontal', sku:'WLF-8000', pvp:389000, hijos:[
-    {st:'ok',   seller:'Garbarino', plat:'VTEX',           precio:372000, visto:'hace 1 h'},
-    {st:'ok',   seller:'Compumundo',plat:'Tienda propia',  precio:389000, visto:'hace 1 h'},
-  ]},
-  { prod:'Microondas Whirlpool 20L', sku:'WMW-20', pvp:142000, hijos:[
-    {st:'ok',   seller:'Frávega',   plat:'VTEX',           precio:142000, visto:'hace 3 h'},
-    {st:'ok',   seller:'Musimundo', plat:'Mercado Libre',  precio:145000, visto:'hace 3 h'},
-  ]},
-];
+  // plataformas
+  const kp=document.getElementById('k-plats');
+  if(x.plats.length===0){kp.innerHTML='<div class="text-[13px] text-emerald-600 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Sin plataformas con desvíos</div>';}
+  else{kp.innerHTML=x.plats.map(p=>`<div class="flex items-center justify-between"><span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full ${sevDotc[p.sev]}"></span>${p.p}</span><span class="nums text-slate-500">${p.desv} de ${p.tot}</span></div>`).join('');}
 
-const iconEdit = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>';
-const iconMore = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="5" r="0.5"/><circle cx="12" cy="12" r="0.5"/><circle cx="12" cy="19" r="0.5"/></svg>';
-const iconPause = '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+  // sellers/skus counts
+  document.getElementById('k-sellers').innerHTML=`${x.sellersDesv}<span class="text-lg text-slate-400"> / ${x.sellersTot}</span>`;
+  document.getElementById('k-skus').innerHTML=`${x.skusDesv}<span class="text-base text-slate-400"> / ${x.skusTot}</span>`;
 
-function aggDot(hijos){
-  if(hijos.some(h=>h.st==='err')) return 'err';
-  if(hijos.some(h=>h.st==='warn')) return 'warn';
-  return 'ok';
+  // pareto
+  const pc=document.getElementById('pareto-card');
+  if(!x.pareto){pc.style.display='none';}
+  else{pc.style.display='';document.getElementById('pareto-bar').style.width=x.pareto.pct+'%';document.getElementById('pareto-pct').textContent=x.pareto.pct+'% en '+x.pareto.n+' sellers';document.getElementById('pareto-desc').textContent=x.pareto.n+' sellers concentran el '+x.pareto.pct+'% de los desvíos: '+x.pareto.sellers.join(', ')+'. Gestión prioritaria sobre estos.';}
+
+  // tabla sellers
+  const ts=document.getElementById('t-sellers');
+  if(x.sellerRows.length===0){ts.innerHTML='<tr><td colspan="3" class="px-5 py-6 text-center text-emerald-600 text-[13px]">Sin desvíos activos en esta línea</td></tr>';}
+  else{ts.innerHTML=x.sellerRows.map(r=>{const dc=r.d>=5?'text-red-600':r.d>=3?'text-amber-600':'text-slate-500';return `<tr class="hover:bg-slate-50">
+    <td class="px-5 py-3"><div class="flex items-center gap-2 mb-1"><span class="text-[10px] font-bold ${sevBadge[r.sev]} px-1.5 py-0.5 rounded">${sevLabelTxt[r.sev]}</span>${r.promo?'<span class="text-[10px] font-bold bg-violet-100 text-violet-700 px-1.5 py-0.5 rounded">PROMO</span>':''}</div><div class="font-medium">${r.s}</div><span class="text-[11px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">${r.pl}</span></td>
+    <td class="px-3 py-3 text-right nums font-semibold ${sevText[r.sev]}">−${r.desvio.toFixed(0)}%</td>
+    <td class="px-5 py-3 text-right leading-tight"><div class="nums font-semibold ${dc}">${r.d}d</div><div class="nums text-[12px] text-slate-400">${r.v}×/30d</div></td></tr>`;}).join('');}
+
+  // tabla skus
+  const tk=document.getElementById('t-skus');
+  if(x.skuRows.length===0){tk.innerHTML='<tr><td colspan="2" class="px-5 py-6 text-center text-emerald-600 text-[13px]">Sin SKUs afectados en esta línea</td></tr>';}
+  else{tk.innerHTML=x.skuRows.map(r=>{const worst=Math.max(...r.sellers.map(s=>sevRank[s.sev]));const wsev=Object.keys(sevRank).find(k=>sevRank[k]===worst);return `<tr class="hover:bg-slate-50 align-top">
+    <td class="px-5 py-3"><div class="font-medium">${r.sku} · <span class="text-slate-500 font-normal">${r.c}</span></div><div class="mt-1.5 space-y-1">${r.sellers.map(s=>`<div class="flex items-center gap-2 text-[12px]"><span class="bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded">${s.pl}</span><span class="text-slate-600">${s.s}</span><span class="nums font-semibold ${sevText[s.sev]}">−${s.desvio.toFixed(0)}%</span>${s.promo?'<span class="text-[9px] font-bold bg-violet-100 text-violet-700 px-1 py-0.5 rounded">PROMO</span>':''}</div>`).join('')}</div></td>
+    <td class="px-5 py-3 text-right"><span class="text-[12px] font-bold ${sevBadge[wsev]} px-2 py-1 rounded-full">${r.sellers.length}</span></td></tr>`;}).join('');}
+
+  // secundarios
+  document.getElementById('s-reinc').textContent=x.reinc;document.getElementById('s-reinc-sub').textContent=x.reinc?'sellers persistentes':'ninguno activo';
+  document.getElementById('s-racha').textContent=x.racha?x.racha.d+'d':'—';document.getElementById('s-racha-sub').textContent=x.racha?x.racha.s:'sin rachas activas';
+  document.getElementById('s-cob').textContent=x.cob+'%';
+  document.getElementById('s-corr').textContent=x.corr||'0';document.getElementById('s-corr-sub').textContent=x.corr?'volvieron al rango':'sin correcciones hoy';
 }
 
-document.getElementById('bib-body').innerHTML = biblioteca.map((p,i)=>{
-  const agg = aggDot(p.hijos);
-  const parent = `<tbody class="border-b border-slate-100">
-    <tr class="hover:bg-slate-50 cursor-pointer" onclick="toggleRow(${i})">
-      <td class="pl-5 pr-2 py-3.5"><svg id="chev-${i}" class="chev w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></td>
-      <td class="px-2 py-3.5 font-medium text-ink-900">${p.prod}<span class="ml-2 text-[11px] text-slate-400 font-normal">${p.hijos.length} seguimientos</span></td>
-      <td class="px-3 py-3.5 nums text-slate-500">${p.sku}</td>
-      <td class="px-3 py-3.5 text-slate-400 text-[13px]" colspan="2">— nivel producto —</td>
-      <td class="px-3 py-3.5 text-right nums font-medium">${fmt(p.pvp)}</td>
-      <td class="px-3 py-3.5"></td>
-      <td class="px-3 py-3.5"><span class="inline-flex items-center gap-1.5 text-[12px]"><span class="w-2.5 h-2.5 rounded-full ${dot[agg]}"></span></span></td>
-      <td class="px-5 py-3.5"><div class="flex items-center justify-end gap-2 text-slate-400" onclick="event.stopPropagation()">
-        <button class="hover:text-ink-900" title="Editar producto">${iconEdit}</button>
-        <button class="hover:text-ink-900" title="Pausar">${iconPause}</button>
-        <button class="hover:text-ink-900" title="Más">${iconMore}</button></div></td>
-    </tr></tbody>`;
+/* ---------- static bits ---------- */
+document.getElementById('hoy-fecha').textContent=new Date().toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'});
+const cf=document.getElementById('cat-filter');cf.innerHTML='<option value="todas">Todas las líneas</option>'+CATS.map(c=>`<option value="${c}">${c}</option>`).join('');
+document.getElementById('thr-badges').innerHTML=[['CRÍTICO','>'+CFG.crit+'%','bg-red-100 text-red-700'],['MODERADO',CFG.mod+'–'+CFG.crit+'%','bg-amber-100 text-amber-700'],['LEVE',CFG.tol+'–'+CFG.mod+'%','bg-yellow-100 text-yellow-700']].map(([l,r,c])=>`<span class="text-[11px] font-semibold ${c} px-2 py-0.5 rounded">${l} ${r}</span>`).join('');
+document.getElementById('legend').innerHTML=[['CRÍTICO','>'+CFG.crit+'%','bg-red-100 text-red-700'],['MODERADO',CFG.mod+'–'+CFG.crit+'%','bg-amber-100 text-amber-700'],['LEVE',CFG.tol+'–'+CFG.mod+'%','bg-yellow-100 text-yellow-700'],['PROMO','precio promocional detectado','bg-violet-100 text-violet-700']].map(([l,r,c])=>`<span class="flex items-center gap-1.5"><span class="text-[10px] font-bold ${c} px-1.5 py-0.5 rounded">${l}</span><span>${r}</span></span>`).join('');
 
-  const kids = `<tbody id="kids-${i}" class="child-rows bg-slate-50/60">`+ p.hijos.map(h=>`
-    <tr class="hover:bg-slate-100/60 border-b border-slate-100">
-      <td class="pl-5 pr-2 py-3"></td>
-      <td class="px-2 py-3"><div class="flex items-center gap-2.5 pl-3"><span class="w-2.5 h-2.5 rounded-full ${dot[h.st]} shrink-0"></span><span class="text-slate-400">${iconEdit}</span></div></td>
-      <td class="px-3 py-3"></td>
-      <td class="px-3 py-3 font-medium text-ink-900">${h.seller}</td>
-      <td class="px-3 py-3 text-slate-600">${h.plat}</td>
-      <td class="px-3 py-3"></td>
-      <td class="px-3 py-3 text-right nums ${h.precio==null?'text-red-500':'text-slate-700'}">${fmt(h.precio)}</td>
-      <td class="px-3 py-3 text-[12px] text-slate-400">${h.visto}</td>
-      <td class="px-5 py-3"><div class="flex items-center justify-end gap-2 text-slate-400">
-        <button class="hover:text-ink-900" title="Editar seguimiento">${iconEdit}</button>
-        <button class="hover:text-ink-900" title="Más">${iconMore}</button></div></td>
-    </tr>`).join('') + `</tbody>`;
-  return parent + kids;
+/* ================= BIBLIOTECA ================= */
+const dotc={ok:'bg-emerald-500',warn:'bg-amber-400',err:'bg-red-500'};
+const iEdit='<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>';
+const iPause='<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>';
+const iMore='<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="5" r=".5"/><circle cx="12" cy="12" r=".5"/><circle cx="12" cy="19" r=".5"/></svg>';
+const iBell='<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>';
+// Salud de captura (overrides puntuales) para dar variedad; el resto se deriva del flag ok del registro
+const HEALTH={
+  'QN55|Musimundo|Mercado Libre':{st:'warn',visto:'reintentó'},
+  'HWQ|Frávega|VTEX':{st:'warn',visto:'precio atípico'},
+  'QN65|Megatone|VTEX':{st:'ok',visto:'hace 4 h'},
+  'RF27|Frávega|VTEX':{st:'warn',visto:'sin stock'},
+};
+const VISTOS=['hace 1 h','hace 2 h','hace 3 h','hace 40 min','hoy 06:15'];
+// Biblioteca generada desde el catálogo real (P + REC), agrupando por producto
+const BIB=(function(){
+  const order=['SM-S24','SM-A55','QN55','QN65','HWQ','BUDS','RF27','WW90'];
+  const map={};
+  REC.forEach(r=>{
+    (map[r.sku]=map[r.sku]||{prod:P[r.sku].n,sku:r.sku,cat:P[r.sku].c,pvp:P[r.sku].pvp,hijos:[]});
+    const h=HEALTH[r.sku+'|'+r.seller+'|'+r.plat]||{};
+    const d=desvOf(r);
+    map[r.sku].hijos.push({
+      st: h.st || (r.ok===false?'err':'ok'),
+      seller:r.seller, plat:r.plat,
+      visto: h.visto || (r.ok===false?'404':VISTOS[map[r.sku].hijos.length%VISTOS.length]),
+      alert: (d!=null && sevOf(d)!=null)   // alerta activa por defecto en los que están en desvío
+    });
+  });
+  return order.filter(s=>map[s]).map(s=>map[s]);
+})();
+const aggDot=h=>h.some(x=>x.st==='err')?'err':h.some(x=>x.st==='warn')?'warn':'ok';
+const actGroup=(inner)=>`<div class="flex items-center gap-1.5 text-slate-400" onclick="event.stopPropagation()">${inner}</div>`;
+document.getElementById('bib-body').innerHTML=BIB.map((p,i)=>{
+  const parent=`<tbody class="border-b border-slate-100"><tr class="hover:bg-slate-50 cursor-pointer" onclick="tr(${i})">
+    <td class="pl-4 pr-1 py-3.5"><svg id="cv-${i}" class="chev w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></td>
+    <td class="px-3 py-3.5">${actGroup(`<button class="hover:text-ink-900" title="Editar producto">${iEdit}</button><button class="hover:text-ink-900" title="Pausar">${iPause}</button><button class="hover:text-ink-900" title="Más">${iMore}</button>`)}</td>
+    <td class="px-2 py-3.5 text-center"><span class="inline-block w-2.5 h-2.5 rounded-full ${dotc[aggDot(p.hijos)]}"></span></td>
+    <td class="px-3 py-3.5 font-medium">${p.prod}<span class="ml-2 text-[11px] text-slate-400 font-normal">${p.hijos.length} seguimientos</span></td>
+    <td class="px-3 py-3.5 nums text-slate-500">${p.sku}</td>
+    <td class="px-3 py-3.5"><span class="text-[12px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p.cat}</span></td>
+    <td class="px-3 py-3.5"></td><td class="px-3 py-3.5"></td>
+    <td class="px-3 py-3.5 text-right nums font-medium">${fmt(p.pvp)}</td>
+    <td class="px-5 py-3.5"></td></tr></tbody>`;
+  const kids=`<tbody id="kd-${i}" class="child-rows bg-slate-50/60">`+p.hijos.map((h,j)=>`<tr class="hover:bg-slate-100/60 border-b border-slate-100">
+    <td class="pl-4 pr-1 py-3"></td>
+    <td class="px-3 py-3">${actGroup(`<button class="hover:text-ink-900" title="Editar seguimiento">${iEdit}</button><button id="bell-${i}-${j}" onclick="bell(${i},${j})" class="${h.alert?'text-brand-500':'hover:text-ink-900'}" title="Alerta ${h.alert?'activa':'desactivada'}">${iBell}</button><button class="hover:text-ink-900" title="Más">${iMore}</button>`)}</td>
+    <td class="px-2 py-3 text-center"><span class="inline-block w-2.5 h-2.5 rounded-full ${dotc[h.st]}"></span></td>
+    <td class="px-3 py-3"></td><td class="px-3 py-3"></td><td class="px-3 py-3"></td>
+    <td class="px-3 py-3 font-medium">${h.seller}</td>
+    <td class="px-3 py-3 text-slate-600">${h.plat}</td>
+    <td class="px-3 py-3"></td>
+    <td class="px-5 py-3 text-[12px] text-slate-400">${h.visto}</td></tr>`).join('')+`</tbody>`;
+  return parent+kids;
 }).join('');
+function tr(i){document.getElementById('kd-'+i).classList.toggle('open');document.getElementById('cv-'+i).classList.toggle('open');}
+function bell(i,j){const b=document.getElementById(`bell-${i}-${j}`);const on=b.classList.toggle('text-brand-500');b.classList.toggle('text-slate-400',!on);b.title='Alerta '+(on?'activa':'desactivada');}
+tr(0);
 
-function toggleRow(i){
-  document.getElementById('kids-'+i).classList.toggle('open');
-  document.getElementById('chev-'+i).classList.toggle('open');
-}
-
-/* ---------- sellers ---------- */
-const sellers = [
-  { n:'Frávega',    plats:['VTEX','Mercado Libre'], prods:3, cumpl:92, estado:'ok' },
-  { n:'Garbarino',  plats:['VTEX'],                 prods:1, cumpl:0,  estado:'bad' },
-  { n:'Compumundo', plats:['Tienda propia'],        prods:1, cumpl:100,estado:'ok' },
-  { n:'Musimundo',  plats:['Mercado Libre','Banco Provincia'], prods:2, cumpl:50, estado:'bad' },
-  { n:'Naldo',      plats:['VTEX'],                 prods:1, cumpl:100,estado:'ok' },
+/* ================= SELLERS ================= */
+const SELLERS=[
+  {n:'Frávega',plats:['VTEX','Mercado Libre'],prods:5,cumpl:55,estado:'bad'},
+  {n:'Garbarino',plats:['VTEX'],prods:3,cumpl:40,estado:'bad'},
+  {n:'Musimundo',plats:['Mercado Libre'],prods:2,cumpl:60,estado:'bad'},
+  {n:'Megatone',plats:['VTEX'],prods:3,cumpl:70,estado:'bad'},
+  {n:'Compumundo',plats:['Tienda propia'],prods:2,cumpl:100,estado:'ok'},
+  {n:'Naldo',plats:['VTEX'],prods:2,cumpl:100,estado:'ok'},
 ];
-document.getElementById('sellers-grid').innerHTML = sellers.map(s=>{
-  const badge = s.estado==='ok'
-    ? '<span class="text-[12px] font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">Cumple PVP</span>'
-    : '<span class="text-[12px] font-semibold bg-red-100 text-red-700 px-2.5 py-1 rounded-full">Incumple</span>';
-  const plats = s.plats.map(p=>`<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p}</span>`).join(' ');
-  return `<div class="bg-white rounded-xl border border-slate-200 p-5">
-    <div class="flex items-start justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg bg-ink-800 text-white flex items-center justify-center font-bold">${s.n[0]}</div>
-        <div><div class="font-semibold">${s.n}</div><div class="text-[12px] text-slate-400">${s.prods} producto${s.prods>1?'s':''} monitoreado${s.prods>1?'s':''}</div></div>
-      </div>${badge}
-    </div>
-    <div class="mt-4 flex flex-wrap gap-1.5">${plats}</div>
-    <div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-      <span class="text-[12px] text-slate-500">Cumplimiento PVP</span>
-      <span class="nums font-semibold ${s.cumpl>=90?'text-emerald-600':s.cumpl>=60?'text-amber-600':'text-red-600'}">${s.cumpl}%</span>
-    </div>
-  </div>`;
-}).join('');
+document.getElementById('sellers-grid').innerHTML=SELLERS.map(s=>`<div class="bg-white rounded-xl border border-slate-200 p-5"><div class="flex items-start justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-lg bg-ink-800 text-white flex items-center justify-center font-bold">${s.n[0]}</div><div><div class="font-semibold">${s.n}</div><div class="text-[12px] text-slate-400">${s.prods} productos monitoreados</div></div></div>${s.estado==='ok'?'<span class="text-[12px] font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded-full">Cumple</span>':'<span class="text-[12px] font-semibold bg-red-100 text-red-700 px-2.5 py-1 rounded-full">Incumple</span>'}</div><div class="mt-4 flex flex-wrap gap-1.5">${s.plats.map(p=>`<span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p}</span>`).join('')}</div><div class="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between"><span class="text-[12px] text-slate-500">Cumplimiento PVP</span><span class="nums font-semibold ${s.cumpl>=90?'text-emerald-600':s.cumpl>=60?'text-amber-600':'text-red-600'}">${s.cumpl}%</span></div></div>`).join('');
 
-/* ---------- seguimiento de precios ---------- */
-const segData = [
-  { prod:'Heladera Whirlpool 360L', sku:'WHE-360NF', seller:'Frávega',   plat:'VTEX',          pvp:450000, real:458000 },
-  { prod:'Heladera Whirlpool 360L', sku:'WHE-360NF', seller:'Frávega',   plat:'Mercado Libre', pvp:450000, real:449000 },
-  { prod:'Heladera Whirlpool 360L', sku:'WHE-360NF', seller:'Musimundo', plat:'Mercado Libre', pvp:450000, real:420000 },
-  { prod:'Lavarropas Whirlpool 8kg',sku:'WLF-8000',  seller:'Garbarino', plat:'VTEX',          pvp:389000, real:372000 },
-  { prod:'Lavarropas Whirlpool 8kg',sku:'WLF-8000',  seller:'Compumundo',plat:'Tienda propia', pvp:389000, real:389000 },
-  { prod:'Microondas Whirlpool 20L',sku:'WMW-20',    seller:'Frávega',   plat:'VTEX',          pvp:142000, real:142000 },
+/* ================= SEGUIMIENTO ================= */
+document.getElementById('seg-body').innerHTML=REC.filter(r=>r.precio!=null).map(r=>{const d=desvOf(r);let est,cls,dc;if(d<-1){est='Por encima';cls='bg-slate-100 text-slate-600';dc='text-slate-500';}else if(d>CFG.tol){est='Por debajo';cls='bg-red-100 text-red-700';dc='text-red-600';}else{est='En PVP';cls='bg-emerald-100 text-emerald-700';dc='text-emerald-600';}const dt=(d>0?'−':'+')+Math.abs(d).toFixed(1).replace('.',',')+'%';return `<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${P[r.sku].n}</td><td class="px-3 py-3"><span class="text-[12px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${P[r.sku].c}</span></td><td class="px-3 py-3">${r.seller}</td><td class="px-3 py-3 text-slate-600">${r.plat}</td><td class="px-3 py-3 text-right nums text-slate-500">${fmt(P[r.sku].pvp)}</td><td class="px-3 py-3 text-right nums font-medium">${fmt(r.precio)}</td><td class="px-3 py-3 text-right nums font-semibold ${dc}">${dt}</td><td class="px-5 py-3"><span class="text-[12px] font-semibold ${cls} px-2.5 py-1 rounded-full">${est}</span></td></tr>`;}).join('');
+
+/* ================= ALERTAS ================= */
+const RULES=[
+  {n:'Incumplimiento de PVP',d:'Avisar si un seller publica por debajo del PVP sugerido',on:true,canal:'Email',freq:'Al instante'},
+  {n:'Desvío crítico (>15%)',d:'Avisar ante desvíos que superen el umbral crítico',on:true,canal:'Email',freq:'Al instante'},
+  {n:'Movimientos leves de precio',d:'Registrar cualquier cambio, sin llenarte de mails',on:false,canal:'Solo registrar',freq:'—'},
+  {n:'Falla de captura (404 / estructura)',d:'Avisar si una URL deja de scrapearse bien',on:true,canal:'Email',freq:'Resumen diario'},
 ];
-document.getElementById('seg-body').innerHTML = segData.map(r=>{
-  const desv = ((r.real - r.pvp)/r.pvp)*100;
-  let estado, cls, dcls;
-  if(desv < -1){ estado='Por debajo'; cls='bg-red-100 text-red-700'; dcls='text-red-600'; }
-  else if(desv > 1){ estado='Por encima'; cls='bg-slate-100 text-slate-600'; dcls='text-slate-500'; }
-  else { estado='En PVP'; cls='bg-emerald-100 text-emerald-700'; dcls='text-emerald-600'; }
-  const dtxt = (desv>0?'+':'')+desv.toFixed(1).replace('.',',')+'%';
-  return `<tr class="hover:bg-slate-50">
-    <td class="px-5 py-3.5 font-medium">${r.prod}</td>
-    <td class="px-3 py-3.5 nums text-slate-500">${r.sku}</td>
-    <td class="px-3 py-3.5">${r.seller}</td>
-    <td class="px-3 py-3.5 text-slate-600">${r.plat}</td>
-    <td class="px-3 py-3.5 text-right nums">${fmt(r.pvp)}</td>
-    <td class="px-3 py-3.5 text-right nums font-medium">${fmt(r.real)}</td>
-    <td class="px-3 py-3.5 text-right nums font-semibold ${dcls}">${dtxt}</td>
-    <td class="px-5 py-3.5"><span class="text-[12px] font-semibold ${cls} px-2.5 py-1 rounded-full">${estado}</span></td>
-  </tr>`;
-}).join('');
+document.getElementById('rules').innerHTML=RULES.map(r=>`<div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 flex-wrap"><div class="flex-1 min-w-[180px]"><p class="font-medium">${r.n}</p><p class="text-[12px] text-slate-500 mt-0.5">${r.d}</p></div><div class="flex items-center gap-4"><div class="text-[12px] text-slate-500 text-right"><div>Canal: <span class="font-medium text-ink-900">${r.canal}</span></div><div class="mt-0.5">Frecuencia: <span class="font-medium ${r.freq==='Al instante'?'text-brand-600':'text-ink-900'}">${r.freq}</span></div></div><div class="flex flex-col items-center gap-1"><span class="text-[10px] uppercase tracking-wide text-slate-400">Notificar</span><span class="w-10 rounded-full relative shrink-0 ${r.on?'bg-brand-500':'bg-slate-300'}" style="height:22px"><span class="absolute top-0.5 w-[18px] h-[18px] bg-white rounded-full" style="${r.on?'right:2px':'left:2px'}"></span></span></div></div></div>`).join('');
 
-/* ---------- alertas rules ---------- */
-const rules = [
-  { n:'Incumplimiento de PVP', d:'Avisar si un seller publica por debajo del PVP sugerido', on:true, canal:'Email', freq:'Al instante' },
-  { n:'Desvío grande', d:'Avisar si el precio publicado cae más de 8%', on:true, canal:'Email', freq:'Resumen diario' },
-  { n:'Movimientos leves de precio', d:'Registrar cualquier cambio de precio del seller', on:false, canal:'Solo registrar', freq:'—' },
-  { n:'Falla de captura', d:'Avisar si una URL da 404 o cambió de estructura', on:true, canal:'Email', freq:'Resumen diario' },
-];
-document.getElementById('rules').innerHTML = rules.map(r=>`
-  <div class="bg-white rounded-xl border border-slate-200 p-4 flex items-center gap-4 flex-wrap">
-    <div class="flex-1 min-w-[180px]"><p class="font-medium">${r.n}</p><p class="text-[12px] text-slate-500 mt-0.5">${r.d}</p></div>
-    <div class="flex items-center gap-3">
-      <div class="text-[12px] text-slate-500 text-right">
-        <div>Canal: <span class="font-medium text-ink-900">${r.canal}</span></div>
-        <div class="mt-0.5">Frecuencia: <span class="font-medium ${r.freq==='Al instante'?'text-brand-600':'text-ink-900'}">${r.freq}</span></div>
-      </div>
-      <div class="flex flex-col items-center gap-1">
-        <span class="text-[10px] uppercase tracking-wide text-slate-400">Notificar</span>
-        <span class="w-10 h-5.5 rounded-full relative shrink-0 ${r.on?'bg-brand-500':'bg-slate-300'}" style="height:22px">
-          <span class="absolute top-0.5 w-[18px] h-[18px] bg-white rounded-full transition-all" style="${r.on?'right:2px':'left:2px'}"></span></span>
-      </div>
-    </div>
-  </div>`).join('');
-
-/* ---------- tablero seller bars ---------- */
-document.getElementById('seller-bars').innerHTML = sellers.map(s=>`
-  <div class="flex items-center gap-3 text-sm">
-    <span class="w-28 shrink-0 text-slate-600">${s.n}</span>
-    <div class="flex-1 h-5 bg-slate-100 rounded overflow-hidden"><div class="h-full rounded ${s.cumpl>=90?'bg-emerald-500':s.cumpl>=60?'bg-amber-400':'bg-red-500'}" style="width:${Math.max(s.cumpl,4)}%"></div></div>
-    <span class="nums w-12 text-right text-[13px] font-medium ${s.cumpl>=90?'text-emerald-600':s.cumpl>=60?'text-amber-600':'text-red-600'}">${s.cumpl}%</span>
-  </div>`).join('');
-
-/* open first parent row by default */
-toggleRow(0);
+/* init dashboard */
+paint(compute('todas'));
 </script>
 </body>
 </html>
