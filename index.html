@@ -485,7 +485,7 @@ const BIB=(function(){
 const aggDot=h=>h.some(x=>x.st==='err')?'err':h.some(x=>x.st==='warn')?'warn':'ok';
 const actGroup=(inner)=>`<div class="flex items-center gap-1.5 text-slate-400" onclick="event.stopPropagation()">${inner}</div>`;
 document.getElementById('bib-body').innerHTML=BIB.map((p,i)=>{
-  const parent=`<tbody class="border-b border-slate-100"><tr class="hover:bg-slate-50 cursor-pointer" onclick="tr(${i})">
+  const parent=`<tr class="hover:bg-slate-50 cursor-pointer border-b border-slate-100" onclick="tr(${i})">
     <td class="pl-4 pr-1 py-3.5"><svg id="cv-${i}" class="chev w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></td>
     <td class="px-3 py-3.5">${actGroup(`<button class="hover:text-ink-900" title="Editar producto">${iEdit}</button><button class="hover:text-ink-900" title="Pausar">${iPause}</button><button class="hover:text-ink-900" title="Más">${iMore}</button>`)}</td>
     <td class="px-2 py-3.5 text-center"><span class="inline-block w-2.5 h-2.5 rounded-full ${dotc[aggDot(p.hijos)]}"></span></td>
@@ -494,8 +494,8 @@ document.getElementById('bib-body').innerHTML=BIB.map((p,i)=>{
     <td class="px-3 py-3.5"><span class="text-[12px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p.cat}</span></td>
     <td class="px-3 py-3.5"></td><td class="px-3 py-3.5"></td>
     <td class="px-3 py-3.5 text-right nums font-medium">${fmt(p.pvp)}</td>
-    <td class="px-5 py-3.5"></td></tr></tbody>`;
-  const kids=`<tbody id="kd-${i}" class="child-rows bg-slate-50/60">`+p.hijos.map((h,j)=>`<tr class="hover:bg-slate-100/60 border-b border-slate-100">
+    <td class="px-5 py-3.5"></td></tr>`;
+  const kids=p.hijos.map((h,j)=>`<tr class="kid-${i} hidden bg-slate-50/60 border-b border-slate-100 hover:bg-slate-100/60">
     <td class="pl-4 pr-1 py-3"></td>
     <td class="px-3 py-3">${actGroup(`<button class="hover:text-ink-900" title="Editar seguimiento">${iEdit}</button><button id="bell-${i}-${j}" onclick="bell(${i},${j})" class="${h.alert?'text-brand-500':'hover:text-ink-900'}" title="Alerta ${h.alert?'activa':'desactivada'}">${iBell}</button><button class="hover:text-ink-900" title="Más">${iMore}</button>`)}</td>
     <td class="px-2 py-3 text-center"><span class="inline-block w-2.5 h-2.5 rounded-full ${dotc[h.st]}"></span></td>
@@ -503,10 +503,10 @@ document.getElementById('bib-body').innerHTML=BIB.map((p,i)=>{
     <td class="px-3 py-3 font-medium">${h.seller}</td>
     <td class="px-3 py-3 text-slate-600">${h.plat}</td>
     <td class="px-3 py-3"></td>
-    <td class="px-5 py-3 text-[12px] text-slate-400">${h.visto}</td></tr>`).join('')+`</tbody>`;
+    <td class="px-5 py-3 text-[12px] text-slate-400">${h.visto}</td></tr>`).join('');
   return parent+kids;
 }).join('');
-function tr(i){document.getElementById('kd-'+i).classList.toggle('open');document.getElementById('cv-'+i).classList.toggle('open');}
+function tr(i){document.querySelectorAll('.kid-'+i).forEach(el=>el.classList.toggle('hidden'));const c=document.getElementById('cv-'+i);if(c)c.classList.toggle('open');}
 function bell(i,j){const b=document.getElementById(`bell-${i}-${j}`);const on=b.classList.toggle('text-brand-500');b.classList.toggle('text-slate-400',!on);b.title='Alerta '+(on?'activa':'desactivada');}
 tr(0);
 
