@@ -39,7 +39,7 @@
       <button data-view="actualizacion" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Actualización precios</button>
       <button data-view="sellers" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Sellers</button>
       <button data-view="categorias" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12M6 9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2M6 9v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>Categorías</button>
-      <button data-view="canales" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>Canales de venta</button>
+      <button data-view="canales" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>Puertas</button>
 
       <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2 mt-5">Monitoreo</div>
       <button data-view="dashboard" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>Tablero</button>
@@ -77,12 +77,26 @@
           <button onclick="openModal('modal-prod')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo</button>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-          <table class="w-full text-sm min-w-[800px]">
-            <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-              <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">SKU</th><th class="px-3 py-3 font-medium">Categoría</th>
-              <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
-            <tbody id="prod-body"></tbody>
-          </table>
+          <div class="flex border-b border-slate-200">
+            <button onclick="showTab('prod-activos')" class="px-4 py-3 text-sm font-medium border-b-2 border-slate-800 text-slate-900">Activos</button>
+            <button onclick="showTab('prod-archivados')" class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900">Archivados</button>
+          </div>
+          <div id="prod-activos" class="tab-prod overflow-x-auto">
+            <table class="w-full text-sm min-w-[1000px]">
+              <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
+                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">SKU</th>
+                <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
+              <tbody id="prod-body"></tbody>
+            </table>
+          </div>
+          <div id="prod-archivados" class="tab-prod hidden overflow-x-auto">
+            <table class="w-full text-sm min-w-[1000px]">
+              <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
+                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">SKU</th>
+                <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
+              <tbody id="prod-arch-body"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -90,8 +104,9 @@
       <section id="view-actualizacion" class="view">
         <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
           <div><h1 class="font-display text-2xl font-bold">Actualización de Precios</h1><p class="text-sm text-slate-500 mt-1">Import/Export de precios en Excel.</p></div>
-          <button onclick="openModal('modal-import')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importar Excel</button>
+          <div class="flex gap-2"><button onclick="exportTemplate()" class="flex items-center gap-2 bg-emerald-600 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-emerald-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar</button><button onclick="openModal('modal-import')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Importar Excel</button></div>
         </div>
+        <div class="mb-4"><input type="text" id="sku-search" placeholder="Buscar por SKU..." class="border border-slate-200 rounded-lg px-3 py-2 text-sm w-full md:w-64" onkeyup="filterBySKU(this.value)"></div>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-5">
           <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Última actualización</div><div class="font-display font-bold text-lg mt-1">28 ago 2024</div></div>
           <div class="bg-white rounded-xl border border-slate-200 p-4"><div class="text-[12px] text-slate-500">Productos actualizados</div><div class="font-display font-bold text-lg mt-1">3</div></div>
@@ -101,11 +116,11 @@
           <h2 class="font-semibold mb-4">Historial de importaciones</h2>
           <div class="overflow-x-auto">
             <table class="w-full text-sm min-w-[700px]">
-              <thead><tr class="text-[12px] uppercase tracking-wide text-slate-400 border-b"><th class="px-5 py-3 text-left font-medium">Fecha</th><th class="px-3 py-3 text-left font-medium">Archivo</th><th class="px-3 py-3 text-left font-medium">Estado</th><th class="px-3 py-3 text-right font-medium">Filas</th></tr></thead>
+              <thead><tr class="text-[12px] uppercase tracking-wide text-slate-400 border-b"><th class="px-5 py-3 text-left font-medium">Fecha</th><th class="px-3 py-3 text-left font-medium">Archivo</th><th class="px-3 py-3 text-left font-medium">Usuario</th><th class="px-3 py-3 text-left font-medium">Estado</th><th class="px-3 py-3 text-right font-medium">Filas</th></tr></thead>
               <tbody>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3">28 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-agosto.xlsx</td><td class="px-3 py-3"><span class="text-[11px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Completado</span></td><td class="px-3 py-3 text-right">3</td></tr>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3">15 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-quincena.xlsx</td><td class="px-3 py-3"><span class="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-medium">Parcial (1 error)</span></td><td class="px-3 py-3 text-right">3</td></tr>
-                <tr class="hover:bg-slate-50"><td class="px-5 py-3">01 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-agosto-inicio.xlsx</td><td class="px-3 py-3"><span class="text-[11px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Completado</span></td><td class="px-3 py-3 text-right">3</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3">28 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-agosto.xlsx</td><td class="px-3 py-3 text-slate-500 text-[12px]">Lucas Martínez</td><td class="px-3 py-3"><span class="text-[11px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Completado</span></td><td class="px-3 py-3 text-right">3</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3">15 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-quincena.xlsx</td><td class="px-3 py-3 text-slate-500 text-[12px]">María García</td><td class="px-3 py-3"><span class="text-[11px] bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded font-medium">Parcial (1 error)</span></td><td class="px-3 py-3 text-right">3</td></tr>
+                <tr class="hover:bg-slate-50"><td class="px-5 py-3">01 ago 2024</td><td class="px-3 py-3 text-slate-500">precios-agosto-inicio.xlsx</td><td class="px-3 py-3 text-slate-500 text-[12px]">Lucas Martínez</td><td class="px-3 py-3"><span class="text-[11px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded font-medium">Completado</span></td><td class="px-3 py-3 text-right">3</td></tr>
               </tbody>
             </table>
           </div>
@@ -146,10 +161,10 @@
         </div>
       </section>
 
-      <!-- CANALES DE VENTA -->
+      <!-- PUERTAS -->
       <section id="view-canales" class="view">
         <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
-          <div><h1 class="font-display text-2xl font-bold">Canales de Venta</h1><p class="text-sm text-slate-500 mt-1">Plataformas de venta.</p></div>
+          <div><h1 class="font-display text-2xl font-bold">Puertas</h1><p class="text-sm text-slate-500 mt-1">Canales de venta disponibles.</p></div>
           <button onclick="openModal('modal-canal')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo</button>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
@@ -344,7 +359,7 @@
           <table class="w-full text-sm min-w-[700px]">
             <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
               <th class="px-5 py-3 font-medium">Nombre</th><th class="px-3 py-3 font-medium">Email</th><th class="px-3 py-3 font-medium">Rol</th>
-              <th class="px-3 py-3 font-medium">Estado</th></tr></thead>
+              <th class="px-3 py-3 font-medium">Estado</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
             <tbody id="users-body"></tbody>
           </table>
         </div>
@@ -411,7 +426,7 @@
 <!-- MODALES -->
 <div id="modal-prod" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-prod')">
   <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Nuevo producto</h3>
-    <div class="space-y-4 mb-6"><input type="text" placeholder="Nombre del producto" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="SKU" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option>Smartphones</option><option>Televisores</option><option>Audio</option></select><input type="number" placeholder="PVP Full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="number" placeholder="PVP Promo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></div>
+    <div class="space-y-4 mb-6"><input type="text" placeholder="Nombre del producto" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="Marca" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="Modelo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="SKU" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option>Smartphones</option><option>Televisores</option><option>Audio</option></select><input type="number" placeholder="PVP Full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="number" placeholder="PVP Promo (opcional)" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></div>
     <div class="flex gap-3"><button onclick="closeModal('modal-prod')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="closeModal('modal-prod')" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Guardar</button></div>
   </div>
 </div>
@@ -430,6 +445,21 @@
   </div>
 </div>
 
+<div id="modal-edit-price" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-edit-price')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Editar precio</h3>
+    <p id="edit-prod-name" class="text-[12px] text-slate-600 mb-4">Producto</p>
+    <div class="space-y-4 mb-6"><label class="block"><span class="text-[12px] font-medium text-slate-600 mb-1.5 block">PVP Full</span><input type="number" id="edit-pvp-full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></label><label class="block"><span class="text-[12px] font-medium text-slate-600 mb-1.5 block">PVP Promo (opcional)</span><input type="number" id="edit-pvp-promo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></label></div>
+    <div class="flex gap-3"><button onclick="closeModal('modal-edit-price')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="closeModal('modal-edit-price')" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Guardar</button></div>
+  </div>
+</div>
+
+<div id="modal-edit-product" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-edit-product')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Editar usuario</h3>
+    <div class="space-y-4 mb-6"><input type="text" id="edit-user-name" placeholder="Nombre" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="email" id="edit-user-email" placeholder="Email" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm" readonly><select id="edit-user-role" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option>Viewer</option><option>Analyst</option><option>Manager</option><option>Admin</option></select></div>
+    <div class="flex gap-3"><button onclick="closeModal('modal-edit-product')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="closeModal('modal-edit-product')" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Guardar cambios</button></div>
+  </div>
+</div>
+
 <div id="modal-import" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-import')">
   <div class="bg-white rounded-2xl w-full max-w-2xl p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Importar precios</h3>
     <div class="space-y-4 mb-6">
@@ -444,6 +474,7 @@
     </div>
     <div class="flex gap-3"><button onclick="closeModal('modal-import')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="confirmImport()" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Confirmar importación</button></div>
   </div>
+
 </div>
 
 <div id="modal-cat" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-cat')">
@@ -502,17 +533,21 @@
 function nav(el){const v=el.dataset.view;document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));document.getElementById('view-'+v).classList.add('active');document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');document.querySelector('main').scrollTop=0;}
 function openModal(id){document.getElementById(id).classList.add('open');}
 function closeModal(id){document.getElementById(id).classList.remove('open');}
-function showPreview(input){if(input.files && input.files[0]){const container=document.getElementById('preview-container');const body=document.getElementById('preview-body');body.innerHTML=PRODS.map(p=>`<tr><td class="px-2 py-1">${p.n}</td><td class="px-2 py-1">${p.s}</td><td class="px-2 py-1">${p.c}</td><td class="px-2 py-1 text-right">$${p.pf.toLocaleString('es-AR')}</td><td class="px-2 py-1 text-right">$${p.pp.toLocaleString('es-AR')}</td></tr>`).join('');container.style.display='block';}}
-function confirmImport(){alert('✓ Importación confirmada. '+PRODS.length+' productos actualizados.');closeModal('modal-import');}
+function showPreview(input){if(input.files && input.files[0]){const container=document.getElementById('preview-container');const body=document.getElementById('preview-body');body.innerHTML=PRODS_ACT.map(p=>`<tr><td class="px-2 py-1">${p.n}</td><td class="px-2 py-1">${p.mar}</td><td class="px-2 py-1">${p.mod}</td><td class="px-2 py-1">${p.s}</td><td class="px-2 py-1">${p.c}</td><td class="px-2 py-1 text-right">$${p.pf.toLocaleString('es-AR')}</td><td class="px-2 py-1 text-right">${p.pp?'$'+p.pp.toLocaleString('es-AR'):''}</td></tr>`).join('');container.style.display='block';}}
+function confirmImport(){alert('✓ Importación confirmada. '+PRODS_ACT.length+' productos actualizados.');closeModal('modal-import');}
 
-const PRODS=[{n:'Galaxy S24 128GB',s:'SM-S24',c:'Smartphones',pf:1199000,pp:1099000},{n:'Neo QLED 55"',s:'QN55',c:'Televisores',pf:1450000,pp:1350000},{n:'Soundbar HW-Q800',s:'HWQ',c:'Audio',pf:520000,pp:450000}];
+const PRODS=[{n:'Galaxy S24 128GB',mar:'Samsung',mod:'S24',s:'SM-S24',c:'Smartphones',pf:1199000,pp:'',st:'activo'},{n:'Neo QLED 55"',mar:'Samsung',mod:'QN55',s:'QN55',c:'Televisores',pf:1450000,pp:1350000,st:'activo'},{n:'Soundbar HW-Q800',mar:'Samsung',mod:'HW-Q800',s:'HWQ',c:'Audio',pf:520000,pp:'',st:'activo'},{n:'Galaxy A15',mar:'Samsung',mod:'A15',s:'SM-A15',c:'Smartphones',pf:450000,pp:400000,st:'archivado'}];
+const PRODS_ARCH=PRODS.filter(p=>p.st==='archivado');
+const PRODS_ACT=PRODS.filter(p=>p.st==='activo');
 const SELS=[{n:'Frávega',u:'https://www.fravega.com'},{n:'Garbarino',u:'https://www.garbarino.com'},{n:'Musimundo',u:'https://www.musimundo.com'}];
 const CATS=['Smartphones','Televisores','Audio','Electrohogar','Accesorios','Smart Home'];
 const CHANS=['Mercado Libre','Tienda Nube','VTEX','Tienda propia','Banco Provincia'];
 const SEGS=[{p:'Galaxy S24 128GB',s:'Garbarino',c:'Mercado Libre',i:'8h',alert:true},{p:'Galaxy S24 128GB',s:'Musimundo',c:'Mercado Libre',i:'12h',alert:true},{p:'Neo QLED 55"',s:'Musimundo',c:'Tienda Nube',i:'8h',alert:true}];
 const USERS=[{n:'Lucas Martínez',e:'lucas@samsung.com.ar',r:'Admin',s:'Activo'},{n:'María García',e:'maria@samsung.com.ar',r:'Manager',s:'Activo'},{n:'Carlos López',e:'carlos@samsung.com.ar',r:'Analyst',s:'Activo'},{n:'Ana Rodríguez',e:'ana@samsung.com.ar',r:'Viewer',s:'Invitación pendiente'}];
 
-document.getElementById('prod-body').innerHTML=PRODS.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3">${p.s}</td><td class="px-3 py-3"><span class="text-[12px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p.c}</span></td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">$${p.pp.toLocaleString('es-AR')}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button title="Pausar por falta de stock" class="text-slate-400 hover:text-amber-600 text-[12px] font-medium">⏸ Pausar</button><button title="Archivar (agotado)" class="text-slate-400 hover:text-red-600 text-[12px] font-medium">📦 Archivar</button></td></tr>`).join('');
+document.getElementById('prod-body').innerHTML=PRODS_ACT.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button title="Pausar por falta de stock" class="text-slate-400 hover:text-amber-600 text-[12px] font-medium">⏸ Pausar</button><button title="Archivar (agotado)" class="text-slate-400 hover:text-red-600 text-[12px] font-medium">📦 Archivar</button></td></tr>`).join('');
+
+document.getElementById('prod-arch-body').innerHTML=PRODS_ARCH.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button class="text-slate-400 hover:text-emerald-600 text-[12px] font-medium">♻️ Desarchivar</button></td></tr>`).join('');
 
 document.getElementById('seller-body').innerHTML=SELS.map(s=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${s.n}</td><td class="px-5 py-3 text-slate-500 text-[12px]">${s.u}</td></tr>`).join('');
 
@@ -522,8 +557,13 @@ document.getElementById('cat-body').innerHTML=CATS.map(c=>`<tr class="hover:bg-s
 
 document.getElementById('canal-body').innerHTML=CHANS.map(ch=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${ch}</td><td class="px-5 py-3 text-right"><button class="text-slate-400 hover:text-red-600 text-[12px]">Eliminar</button></td></tr>`).join('');
 
-document.getElementById('users-body').innerHTML=USERS.map(u=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${u.n}</td><td class="px-3 py-3 text-[12px]">${u.e}</td><td class="px-3 py-3"><span class="text-[11px] font-semibold px-2 py-1 rounded ${u.r==='Admin'?'bg-red-100 text-red-700':u.r==='Manager'?'bg-blue-100 text-blue-700':u.r==='Analyst'?'bg-purple-100 text-purple-700':'bg-slate-100 text-slate-700'}">${u.r}</span></td><td class="px-3 py-3"><span class="text-[12px] ${u.s==='Activo'?'text-emerald-600 font-medium':'text-amber-600'}">${u.s}</span></td></tr>`).join('');
+document.getElementById('users-body').innerHTML=USERS.map(u=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${u.n}</td><td class="px-3 py-3 text-[12px]">${u.e}</td><td class="px-3 py-3"><span class="text-[11px] font-semibold px-2 py-1 rounded ${u.r==='Admin'?'bg-red-100 text-red-700':u.r==='Manager'?'bg-blue-100 text-blue-700':u.r==='Analyst'?'bg-purple-100 text-purple-700':'bg-slate-100 text-slate-700'}">${u.r}</span></td><td class="px-3 py-3"><span class="text-[12px] ${u.s==='Activo'?'text-emerald-600 font-medium':'text-amber-600'}">${u.s}</span></td><td class="px-5 py-3 text-right"><button onclick="editUser('${u.n.replace(/'/g,"\\'").replace(/\n/g,"\\n")}','${u.e}','${u.r}')" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button></td></tr>`).join('');
 
+function editPrice(prodName,pf,pp){document.getElementById('edit-prod-name').textContent=prodName;document.getElementById('edit-pvp-full').value=pf;document.getElementById('edit-pvp-promo').value=pp||'';openModal('modal-edit-price');}
+function editUser(name,email,role){document.getElementById('edit-user-name').value=name;document.getElementById('edit-user-email').value=email;document.getElementById('edit-user-role').value=role;openModal('modal-edit-product');}
+function exportTemplate(){const headers=['Nombre','Marca','Modelo','SKU','Categoría','PVP Full','PVP Promo'];const csv=[headers.join(','),...PRODS_ACT.map(p=>[p.n,p.mar,p.mod,p.s,p.c,p.pf,p.pp||''].join(','))].join('\n');const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='plantilla-precios.csv';a.click();}
+function filterBySKU(query){const rows=document.querySelectorAll('#import-history tr');rows.forEach(row=>{const sku=row.textContent.toLowerCase();row.style.display=query===''||sku.includes(query.toLowerCase())?'':'none';});}
+function showTab(tabId){document.querySelectorAll('.tab-prod').forEach(t=>t.classList.add('hidden'));document.getElementById(tabId).classList.remove('hidden');}
 function updateDashboard(cat){const dashData={'':{comp:83,dev:1,sell:1,sku:1,plat:'VTEX',skuName:'SM-S24',seller:'Garbarino'},Smartphones:{comp:85,dev:0,sell:0,sku:0,plat:'—',skuName:'—',seller:'—'},Televisores:{comp:79,dev:2,sell:2,sku:2,plat:'VTEX, Tienda Nube',skuName:'QN55',seller:'Garbarino, Musimundo'},Audio:{comp:91,dev:0,sell:0,sku:0,plat:'—',skuName:'—',seller:'—'},Electrohogar:{comp:88,dev:1,sell:1,sku:1,plat:'ML',skuName:'XYZ123',seller:'Frávega'}};const d=dashData[cat]||dashData[''];document.querySelectorAll('[data-comp]').forEach(el=>{if(el.dataset.comp==='comp')el.textContent=d.comp+'%';else if(el.dataset.comp==='dev')el.textContent=d.dev;else if(el.dataset.comp==='sell')el.textContent=d.sell;else if(el.dataset.comp==='sku')el.textContent=d.sku;else if(el.dataset.comp==='plat')el.textContent=d.plat;else if(el.dataset.comp==='skuName')el.textContent=d.skuName;else if(el.dataset.comp==='seller')el.textContent=d.seller;});}
 updateDashboard('');
 </script>
