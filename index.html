@@ -38,8 +38,8 @@
       <button data-view="productos" onclick="nav(this)" class="nav-item active w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Productos</button>
       <button data-view="actualizacion" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Actualización precios</button>
       <button data-view="sellers" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Sellers</button>
-      <button data-view="categorias" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12M6 9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2M6 9v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>Categorías</button>
-      <button data-view="canales" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>Puertas</button>
+      <button data-view="categorias" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h12M6 9a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2M6 9v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9"/></svg>Categorías y Marcas</button>
+      <button data-view="canales" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>Puertas de venta</button>
 
       <div class="px-3 text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-2 mt-5">Monitoreo</div>
       <button data-view="dashboard" onclick="nav(this)" class="nav-item w-full flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/5 text-left mb-1"><svg class="nav-ic w-[18px] h-[18px] text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>Tablero</button>
@@ -78,21 +78,21 @@
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
           <div class="flex border-b border-slate-200">
-            <button onclick="showTab('prod-activos')" class="px-4 py-3 text-sm font-medium border-b-2 border-slate-800 text-slate-900">Activos</button>
-            <button onclick="showTab('prod-archivados')" class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900">Archivados</button>
+            <button id="tab-activos-btn" onclick="showTab('prod-activos')" class="px-4 py-3 text-sm font-medium border-b-2 border-slate-800 text-slate-900">Activos</button>
+            <button id="tab-archivados-btn" onclick="showTab('prod-archivados')" class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900">Archivados</button>
           </div>
           <div id="prod-activos" class="tab-prod overflow-x-auto">
-            <table class="w-full text-sm min-w-[1000px]">
+            <table class="w-full text-sm min-w-[1100px]">
               <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">SKU</th>
+                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">Categoría</th><th class="px-3 py-3 font-medium">SKU</th>
                 <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
               <tbody id="prod-body"></tbody>
             </table>
           </div>
           <div id="prod-archivados" class="tab-prod hidden overflow-x-auto">
-            <table class="w-full text-sm min-w-[1000px]">
+            <table class="w-full text-sm min-w-[1100px]">
               <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">SKU</th>
+                <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">Categoría</th><th class="px-3 py-3 font-medium">SKU</th>
                 <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
               <tbody id="prod-arch-body"></tbody>
             </table>
@@ -149,22 +149,35 @@
       <!-- CATEGORÍAS -->
       <section id="view-categorias" class="view">
         <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
-          <div><h1 class="font-display text-2xl font-bold">Categorías</h1><p class="text-sm text-slate-500 mt-1">Categorías de productos.</p></div>
-          <button onclick="openModal('modal-cat')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nueva</button>
+          <div><h1 class="font-display text-2xl font-bold">Categorías y Marcas</h1><p class="text-sm text-slate-500 mt-1">Administra categorías y marcas de productos.</p></div>
+          <button id="btn-new-catmarca" onclick="openModal('modal-cat')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nueva</button>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-          <table class="w-full text-sm min-w-[400px]">
-            <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-              <th class="px-5 py-3 font-medium">Categoría</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
-            <tbody id="cat-body"></tbody>
-          </table>
+          <div class="flex border-b border-slate-200">
+            <button id="tab-cat-btn" onclick="showCategoryTab('cat')" class="px-4 py-3 text-sm font-medium border-b-2 border-slate-800 text-slate-900">Categorías</button>
+            <button id="tab-marca-btn" onclick="showCategoryTab('marca')" class="px-4 py-3 text-sm font-medium border-b-2 border-transparent text-slate-600 hover:text-slate-900">Marcas</button>
+          </div>
+          <div id="tab-cat" class="tab-catmarca overflow-x-auto">
+            <table class="w-full text-sm min-w-[400px]">
+              <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
+                <th class="px-5 py-3 font-medium">Categoría</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
+              <tbody id="cat-body"></tbody>
+            </table>
+          </div>
+          <div id="tab-marca" class="tab-catmarca hidden overflow-x-auto">
+            <table class="w-full text-sm min-w-[400px]">
+              <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
+                <th class="px-5 py-3 font-medium">Marca</th><th class="px-5 py-3 font-medium text-right">Acciones</th></tr></thead>
+              <tbody id="marca-body"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
-      <!-- PUERTAS -->
+      <!-- PUERTAS DE VENTA -->
       <section id="view-canales" class="view">
         <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
-          <div><h1 class="font-display text-2xl font-bold">Puertas</h1><p class="text-sm text-slate-500 mt-1">Canales de venta disponibles.</p></div>
+          <div><h1 class="font-display text-2xl font-bold">Puertas de venta</h1><p class="text-sm text-slate-500 mt-1">Canales de venta disponibles.</p></div>
           <button onclick="openModal('modal-canal')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo</button>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
@@ -178,15 +191,11 @@
 
       <!-- TABLERO -->
       <section id="view-dashboard" class="view">
-        <div class="mb-4"><h1 class="font-display text-2xl font-bold">Panel de cumplimiento de PVP sugerido</h1>
-          <div class="flex items-center justify-between gap-4 mt-2 mb-4 flex-wrap">
-            <div class="flex items-center gap-4 text-[12px] text-slate-500">
-              <span>Última captura: <strong>hoy 07:42 hs</strong></span>
-              <span>01 de julio de 2026</span>
-              <span>Tolerancia: <strong>±3%</strong></span>
-              <span class="text-emerald-600">● Sistema OK</span>
-            </div>
-            <select id="cat-filter" onchange="updateDashboard(this.value)" class="border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white">
+        <!-- HEADER -->
+        <div class="mb-6">
+          <div class="flex items-center justify-between gap-4 mb-2">
+            <h1 class="font-display text-2xl font-bold">Panel de Control</h1>
+            <select id="cat-filter" onchange="updateDashboard(this.value)" class="border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white font-medium">
               <option value="">Todas las categorías</option>
               <option value="Smartphones">Smartphones</option>
               <option value="Televisores">Televisores</option>
@@ -194,110 +203,188 @@
               <option value="Electrohogar">Electrohogar</option>
             </select>
           </div>
+          <p class="text-sm text-slate-500">Última captura: <strong>hoy 14:32 hs</strong> · Tolerancia: <strong>±3%</strong> · <span class="text-emerald-600 font-medium">● Sistema OK</span></p>
         </div>
-        <div class="flex gap-2 mb-4 text-[11px] font-semibold">
-          <span class="bg-red-100 text-red-700 px-2.5 py-1 rounded">CRÍTICO >15%</span>
-          <span class="bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded">MODERADO 5-15%</span>
-          <span class="bg-lime-100 text-lime-700 px-2.5 py-1 rounded">LEVE 3-5%</span>
-        </div>
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-          <div class="flex gap-3"><svg class="w-5 h-5 text-yellow-600 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20m10-10H2"/></svg>
-            <div><p class="font-semibold text-[13px] text-yellow-900">Desvíos leves detectados</p><p class="text-[12px] text-yellow-800 mt-0.5">Movimientos menores, dentro de lo esperable.</p></div>
-          </div>
-          <div class="grid grid-cols-4 gap-3 mt-3 text-center">
-            <div><div class="nums font-display text-lg font-bold text-red-600">0</div><p class="text-[10px] text-slate-600 mt-1 uppercase">CRÍTICOS</p></div>
-            <div><div class="nums font-display text-lg font-bold text-yellow-600">0</div><p class="text-[10px] text-slate-600 mt-1 uppercase">MODERADOS</p></div>
-            <div><div class="nums font-display text-lg font-bold text-lime-600">1</div><p class="text-[10px] text-slate-600 mt-1 uppercase">LEVES</p></div>
-            <div><div class="nums font-display text-lg font-bold text-slate-400">0</div><p class="text-[10px] text-slate-600 mt-1 uppercase">NUEVOS HOY</p></div>
-          </div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><h3 class="text-[12px] font-semibold text-slate-600 uppercase mb-2">Cumplimiento global</h3><div class="nums font-display text-3xl font-bold" data-comp="comp">83%</div><p class="text-[11px] text-slate-500 mt-1">6 sellers · 2 SKUs monitoreados</p></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><h3 class="text-[12px] font-semibold text-slate-600 uppercase mb-2">Desvíos por plataforma</h3><div class="space-y-1.5 text-[12px]"><div class="flex justify-between"><span data-comp="plat">VTEX</span><span class="font-semibold" data-comp="dev">1</span> de 4</div></div></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><h3 class="text-[12px] font-semibold text-slate-600 uppercase mb-2">Sellers en desvío</h3><div class="nums font-display text-2xl font-bold"><span data-comp="sell">1</span><span class="text-base text-slate-500">/6</span></div><div class="space-y-1.5 text-[12px] mt-2"><div>SKUs afectados</div><div class="nums font-display text-lg font-bold"><span data-comp="sku">1</span><span class="text-base text-slate-500">/2</span></div></div></div>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><h3 class="font-semibold text-[13px] mb-3">Sellers con desvíos activos</h3>
-            <div class="text-[11px] space-y-3 divide-y">
-              <div class="flex gap-2"><span class="bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded text-[10px] font-semibold h-fit">LEVE</span><div><p class="font-semibold"><span data-comp="seller">Garbarino</span> · VTEX</p><p class="text-slate-500">-4% · 5d/30d</p></div></div>
+
+        <!-- NIVEL 1: BANNER CRÍTICO (Rojo, Llamativo, 0-3 seg) -->
+        <div id="critical-banner" class="bg-red-600 text-white rounded-xl p-6 mb-6 shadow-lg hover:shadow-xl transition-shadow cursor-pointer border-l-4 border-red-700">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+                <span class="font-bold text-lg">CRÍTICO</span>
+              </div>
+              <p class="text-xl font-bold mb-1">Garbarino -8% · 4 días en VTEX</p>
+              <p class="text-red-100 text-sm">3ª violación en 30 días · Recomendación: ESCALAR</p>
+            </div>
+            <div class="text-right">
+              <div class="text-3xl font-bold">-8%</div>
+              <div class="text-red-100 text-xs mt-1">4 días</div>
             </div>
           </div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><h3 class="font-semibold text-[13px] mb-3">SKUs más incumplidos</h3>
-            <div class="space-y-2 text-[11px]"><div class="flex justify-between"><span class="font-semibold"><span data-comp="skuName">SM-S24</span> · Smartphones</span><span class="text-[10px]">1</span></div><p class="text-slate-500 text-[10px]">VTEX · Garbarino -4%</p></div>
+          <div class="flex gap-2 mt-4 pt-4 border-t border-red-500">
+            <button onclick="openContactModal('Garbarino','VTEX')" class="flex-1 bg-white text-red-600 font-bold py-2.5 rounded-lg hover:bg-red-50 transition-colors">
+              → CONTACTAR AHORA
+            </button>
+            <button onclick="nav(document.querySelector('[data-view=timeline]'))" class="flex-1 border border-white text-white font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">
+              Ver Timeline
+            </button>
+            <button class="flex-1 border border-white text-white font-semibold py-2.5 rounded-lg hover:bg-red-700 transition-colors">
+              Escalar
+            </button>
           </div>
         </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-          <div class="bg-white rounded-lg border border-slate-200 p-3 text-center"><p class="text-[11px] text-slate-500">Re-incidentes ≥3 días</p><div class="nums font-display text-2xl font-bold mt-1">1</div><p class="text-[10px] text-slate-500 mt-0.5">sellers persistentes</p></div>
-          <div class="bg-white rounded-lg border border-slate-200 p-3 text-center"><p class="text-[11px] text-slate-500">Racha máxima activa</p><div class="nums font-display text-2xl font-bold mt-1">4d</div><p class="text-[10px] text-slate-500 mt-0.5">Garbarino</p></div>
-          <div class="bg-white rounded-lg border border-slate-200 p-3 text-center"><p class="text-[11px] text-slate-500">Cobertura de scraping</p><div class="nums font-display text-2xl font-bold mt-1 text-emerald-600">100%</div><p class="text-[10px] text-slate-500 mt-0.5">de URLs OK</p></div>
-          <div class="bg-white rounded-lg border border-slate-200 p-3 text-center"><p class="text-[11px] text-slate-500">Correcciones hoy</p><div class="nums font-display text-2xl font-bold mt-1">1</div><p class="text-[10px] text-slate-500 mt-0.5">volvieron al rango</p></div>
+
+        <!-- NIVEL 2: KPIs OPERATIVOS (3-10 seg) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold mb-2">Cumplimiento hoy</p>
+            <div class="flex items-baseline gap-2">
+              <div class="font-display text-4xl font-bold text-slate-900" data-comp="comp">83</div>
+              <span class="text-lg text-slate-500">%</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2">6 sellers · 2 SKUs monitoreados</p>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold mb-2">Violaciones</p>
+            <div class="flex gap-3 mt-2">
+              <div>
+                <div class="text-red-600 font-bold text-2xl">1</div>
+                <p class="text-xs text-red-600 font-medium">Crítico</p>
+              </div>
+              <div>
+                <div class="text-yellow-600 font-bold text-2xl">0</div>
+                <p class="text-xs text-yellow-600 font-medium">Moderado</p>
+              </div>
+              <div>
+                <div class="text-green-600 font-bold text-2xl">0</div>
+                <p class="text-xs text-green-600 font-medium">Leve</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold mb-2">Sellers en desvío</p>
+            <div class="flex items-baseline gap-1 mb-3">
+              <div class="font-display text-3xl font-bold text-slate-900" data-comp="sell">1</div>
+              <span class="text-slate-500">/6</span>
+            </div>
+            <p class="text-xs text-slate-600">SKUs afectados: <span class="font-bold" data-comp="sku">1</span>/2</p>
+          </div>
+
+          <div class="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold mb-2">Racha máxima activa</p>
+            <div class="flex items-baseline gap-2 mb-2">
+              <div class="font-display text-3xl font-bold text-slate-900">4</div>
+              <span class="text-slate-600">días</span>
+            </div>
+            <p class="text-xs text-slate-600">Garbarino · VTEX</p>
+          </div>
+        </div>
+
+        <!-- NIVEL 3: TABLA DE SELLERS EN DESVÍO (10-60 seg) -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+          <h2 class="font-bold text-lg mb-4">Sellers en Desvío AHORA</h2>
+          <div id="sellers-deviation-table" class="space-y-3">
+            <!-- Generado por JavaScript -->
+          </div>
+        </div>
+
+        <!-- NIVEL 4: SKUs MÁS CRÍTICOS -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 mb-6">
+          <h2 class="font-bold text-lg mb-4">Productos en Desvío</h2>
+          <div class="border-l-4 border-red-600 pl-4 py-2">
+            <p class="font-bold text-sm mb-1">Galaxy S24 128GB (SM-S24)</p>
+            <p class="text-xs text-slate-600 mb-2">Smartphones · Garbarino VTEX</p>
+            <div class="flex gap-3 text-sm mb-3">
+              <span class="font-bold text-red-600">-8%</span>
+              <span class="text-slate-600">hace 4 días</span>
+            </div>
+            <button onclick="nav(document.querySelector('[data-view=timeline]'))" class="text-sm text-blue-600 font-semibold hover:text-blue-700">
+              → Ver Timeline del SKU
+            </button>
+          </div>
+        </div>
+
+        <!-- NIVEL 5: MÉTRICAS OPERATIVAS -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-4 text-center hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-600 font-semibold mb-2">Re-incidentes</p>
+            <div class="font-display text-2xl font-bold text-slate-900">1</div>
+            <p class="text-xs text-slate-600 mt-1">≥3 días consecutivos</p>
+          </div>
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-4 text-center hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-600 font-semibold mb-2">Scraping OK</p>
+            <div class="font-display text-2xl font-bold text-emerald-600">100%</div>
+            <p class="text-xs text-slate-600 mt-1">URLs monitoreadas</p>
+          </div>
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-4 text-center hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-600 font-semibold mb-2">Fallas captura</p>
+            <div class="font-display text-2xl font-bold text-slate-900">0</div>
+            <p class="text-xs text-slate-600 mt-1">hoy</p>
+          </div>
+          <div class="bg-slate-50 rounded-lg border border-slate-200 p-4 text-center hover:shadow-md transition-shadow">
+            <p class="text-xs uppercase tracking-wide text-slate-600 font-semibold mb-2">Correcciones</p>
+            <div class="font-display text-2xl font-bold text-slate-900">1</div>
+            <p class="text-xs text-slate-600 mt-1">volvieron al rango</p>
+          </div>
         </div>
       </section>
 
       <!-- TIMELINE -->
       <section id="view-timeline" class="view">
-        <div class="mb-5"><h1 class="font-display text-2xl font-bold">Timeline</h1><p class="text-sm text-slate-500 mt-1">Evolución del cumplimiento a lo largo del tiempo.</p></div>
+        <div class="mb-5"><h1 class="font-display text-2xl font-bold">Timeline</h1><p class="text-sm text-slate-500 mt-1">Evolución de precio vs PVP aceptable. Historial analítico para conversaciones con distribuidores.</p></div>
+        <div class="flex gap-4 mb-5">
+          <div><label class="block text-[12px] font-medium text-slate-600 mb-1.5">Seller</label><select id="timeline-seller" onchange="updateTimeline()" class="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white"><option value="Frávega">Frávega</option><option value="Garbarino" selected>Garbarino</option><option value="Musimundo">Musimundo</option></select></div>
+          <div><label class="block text-[12px] font-medium text-slate-600 mb-1.5">Período</label><select id="timeline-period" onchange="updateTimeline()" class="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white"><option value="30">Últimos 30 días</option><option value="90" selected>Últimos 90 días</option><option value="180">Últimos 6 meses</option></select></div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-5">
+          <div class="bg-white rounded-lg border border-slate-200 p-3"><div class="text-[11px] text-slate-600 font-medium">Días en incumplimiento</div><div id="tl-days-breach" class="font-display font-bold text-lg mt-1">—</div></div>
+          <div class="bg-white rounded-lg border border-slate-200 p-3"><div class="text-[11px] text-slate-600 font-medium">Desvío promedio</div><div id="tl-avg-deviation" class="font-display font-bold text-lg mt-1">—</div></div>
+          <div class="bg-white rounded-lg border border-slate-200 p-3"><div class="text-[11px] text-slate-600 font-medium">Desvío máximo</div><div id="tl-max-deviation" class="font-display font-bold text-lg mt-1">—</div></div>
+          <div class="bg-white rounded-lg border border-slate-200 p-3"><div class="text-[11px] text-slate-600 font-medium">Patrón detectado</div><div id="tl-pattern" class="font-display font-bold text-[12px] mt-1">—</div></div>
+        </div>
+        <div class="bg-white rounded-xl border border-slate-200 p-6 mb-5">
+          <div id="timeline-chart" style="height:350px;position:relative;"></div>
+        </div>
         <div class="bg-white rounded-xl border border-slate-200 p-6">
-          <div class="mb-4 flex gap-4"><div><label class="block text-[12px] font-medium text-slate-600 mb-1.5">Producto</label><select class="border border-slate-200 rounded-lg px-3 py-2 text-sm"><option>Galaxy S24 128GB</option><option>Neo QLED 55"</option></select></div><div><label class="block text-[12px] font-medium text-slate-600 mb-1.5">Período</label><select class="border border-slate-200 rounded-lg px-3 py-2 text-sm"><option>Últimos 30 días</option><option>Últimos 7 días</option></select></div></div>
-          <svg viewBox="0 0 800 300" style="width:100%;height:300px" class="border border-slate-200 rounded-lg bg-gradient-to-br from-slate-50 to-white">
-            <!-- Grid -->
-            <g stroke="#e2e8f0" stroke-width="1">
-              <line x1="50" y1="250" x2="750" y2="250"/><line x1="50" y1="200" x2="750" y2="200"/><line x1="50" y1="150" x2="750" y2="150"/><line x1="50" y1="100" x2="750" y2="100"/><line x1="50" y1="50" x2="750" y2="50"/>
-            </g>
-            <!-- Y-axis labels -->
-            <text x="20" y="255" font-size="11" fill="#94a3b8">100%</text><text x="20" y="205" font-size="11" fill="#94a3b8">80%</text><text x="20" y="155" font-size="11" fill="#94a3b8">60%</text><text x="20" y="105" font-size="11" fill="#94a3b8">40%</text><text x="20" y="55" font-size="11" fill="#94a3b8">20%</text>
-            <!-- Axes -->
-            <line x1="50" y1="50" x2="50" y2="250" stroke="#64748b" stroke-width="2"/><line x1="50" y1="250" x2="750" y2="250" stroke="#64748b" stroke-width="2"/>
-            <!-- Data line (compliance curve) -->
-            <polyline points="70,120 110,110 150,130 190,90 230,100 270,95 310,110 350,115 390,85 430,100 470,105 510,95 550,110 590,120 630,110 670,130 710,125 750,140" stroke="#0E8F8E" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- Evento markers -->
-            <circle cx="190" cy="90" r="4" fill="#ef4444"/><circle cx="390" cy="85" r="4" fill="#ef4444"/>
-            <circle cx="270" cy="95" r="4" fill="#10b981"/>
-            <!-- Tooltips para eventos -->
-            <g opacity="0.9">
-              <rect x="175" y="60" width="80" height="24" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-              <text x="185" y="77" font-size="10" fill="#dc2626" font-weight="600">-8% detectado</text>
-            </g>
-            <g opacity="0.9">
-              <rect x="375" y="55" width="80" height="24" rx="4" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-              <text x="385" y="72" font-size="10" fill="#dc2626" font-weight="600">-12% crítico</text>
-            </g>
-            <g opacity="0.9">
-              <rect x="255" y="65" width="80" height="24" rx="4" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-              <text x="260" y="82" font-size="10" fill="#16a34a" font-weight="600">Corrección</text>
-            </g>
-            <!-- X-axis labels (days) -->
-            <text x="65" y="270" font-size="10" fill="#94a3b8">1 ago</text><text x="545" y="270" font-size="10" fill="#94a3b8">15 ago</text><text x="740" y="270" font-size="10" fill="#94a3b8">30 ago</text>
-          </svg>
-          <div class="mt-4 space-y-2 text-[12px]">
-            <div class="flex gap-3 border-l-4 border-red-500 pl-3"><p><strong>23 ago</strong> — Desvío crítico detectado en Garbarino (-8%)</p></div>
-            <div class="flex gap-3 border-l-4 border-red-500 pl-3"><p><strong>19 ago</strong> — Escaló a desvío crítico (-12%)</p></div>
-            <div class="flex gap-3 border-l-4 border-emerald-500 pl-3"><p><strong>17 ago</strong> — Corrección automática: volvió a 95%</p></div>
+          <h2 class="font-semibold mb-4 text-[14px]">Episodios de incumplimiento</h2>
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm min-w-[700px]">
+              <thead><tr class="text-[12px] uppercase tracking-wide text-slate-400 border-b"><th class="px-4 py-3 text-left font-medium">Episodio</th><th class="px-4 py-3 text-left font-medium">Período</th><th class="px-4 py-3 text-right font-medium">Duración</th><th class="px-4 py-3 text-right font-medium">Desvío Prom.</th><th class="px-4 py-3 text-right font-medium">Desvío Máx.</th></tr></thead>
+              <tbody id="timeline-episodes"></tbody>
+            </table>
           </div>
         </div>
       </section>
 
       <!-- SCORING -->
       <section id="view-scoring" class="view">
-        <div class="mb-5"><h1 class="font-display text-2xl font-bold">Scoring de Riesgo</h1><p class="text-sm text-slate-500 mt-1">Score de riesgo por seller.</p></div>
-        <div class="space-y-3">
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold">Garbarino</h3><span class="text-[11px] font-semibold bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded">Ocasional (12%)</span></div><div class="text-[12px] text-slate-600">Desvíos detectados en los últimos 30 días</div><div class="mt-3 w-full bg-slate-200 rounded-full h-2"><div class="bg-yellow-500 h-2 rounded-full" style="width:60%"></div></div><p class="text-[11px] text-slate-500 mt-2">6-15% desvío promedio</p></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold">Musimundo</h3><span class="text-[11px] font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded">Confiable (3%)</span></div><div class="text-[12px] text-slate-600">Cumplimiento consistente</div><div class="mt-3 w-full bg-slate-200 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width:30%"></div></div><p class="text-[11px] text-slate-500 mt-2">3-5% desvío promedio</p></div>
-          <div class="bg-white rounded-xl border border-slate-200 p-5"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold">Frávega</h3><span class="text-[11px] font-semibold bg-emerald-100 text-emerald-700 px-2.5 py-1 rounded">Confiable (2%)</span></div><div class="text-[12px] text-slate-600">Cumplimiento consistente</div><div class="mt-3 w-full bg-slate-200 rounded-full h-2"><div class="bg-emerald-500 h-2 rounded-full" style="width:20%"></div></div><p class="text-[11px] text-slate-500 mt-2">3-5% desvío promedio</p></div>
+        <div class="mb-5"><h1 class="font-display text-2xl font-bold">Scoring</h1><p class="text-sm text-slate-500 mt-1">Confiabilidad acumulada. Patrón de comportamiento sostenido para gobernar la red de distribución.</p></div>
+        <div class="flex items-center gap-3 mb-5">
+          <label class="text-[12px] font-medium text-slate-600">Período:</label>
+          <select id="scoring-period" class="border border-slate-200 rounded-lg px-3 py-2 text-sm bg-white" onchange="updateScoringPeriod(this.value)">
+            <option value="30">Últimos 30 días</option>
+            <option value="90" selected>Últimos 90 días</option>
+            <option value="180">Últimos 6 meses</option>
+          </select>
         </div>
+        <div id="scoring-container" class="space-y-4"></div>
       </section>
 
       <!-- SEGUIMIENTO -->
       <section id="view-seguimiento" class="view">
         <div class="flex items-end justify-between mb-5 flex-wrap gap-3">
-          <div><h1 class="font-display text-2xl font-bold">Seguimiento</h1><p class="text-sm text-slate-500 mt-1">Vinculación de monitores.</p></div>
-          <button onclick="openModal('modal-seg')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo</button>
+          <div><h1 class="font-display text-2xl font-bold">Seguimiento</h1><p class="text-sm text-slate-500 mt-1">Configuración de monitoreo por producto, seller y canal.</p></div>
+          <button onclick="openModal('modal-seg')" class="flex items-center gap-2 bg-slate-800 text-white text-sm font-medium rounded-lg px-4 py-2.5 hover:bg-slate-700"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Nuevo seguimiento</button>
         </div>
         <div class="bg-white rounded-xl border border-slate-200 overflow-x-auto">
-          <table class="w-full text-sm min-w-[1000px]">
+          <table class="w-full text-sm min-w-[1400px]">
             <thead><tr class="text-left text-[12px] uppercase tracking-wide text-slate-400 border-b border-slate-200">
-              <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Seller</th><th class="px-3 py-3 font-medium">Canal</th>
-              <th class="px-3 py-3 font-medium">Intervalo</th><th class="px-3 py-3 font-medium text-center">Alertas</th></tr></thead>
+              <th class="px-5 py-3 font-medium">Producto</th><th class="px-3 py-3 font-medium">Marca</th><th class="px-3 py-3 font-medium">Modelo</th><th class="px-3 py-3 font-medium">Categoría</th><th class="px-3 py-3 font-medium">SKU</th>
+              <th class="px-3 py-3 font-medium text-right">PVP Full</th><th class="px-3 py-3 font-medium text-right">PVP Promo</th>
+              <th class="px-3 py-3 font-medium">Seller</th><th class="px-3 py-3 font-medium">Canal</th><th class="px-3 py-3 font-medium text-center">Alertas</th></tr></thead>
             <tbody id="seg-body"></tbody>
           </table>
         </div>
@@ -426,7 +513,7 @@
 <!-- MODALES -->
 <div id="modal-prod" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-prod')">
   <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Nuevo producto</h3>
-    <div class="space-y-4 mb-6"><input type="text" placeholder="Nombre del producto" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="Marca" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="Modelo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="SKU" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option>Smartphones</option><option>Televisores</option><option>Audio</option></select><input type="number" placeholder="PVP Full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="number" placeholder="PVP Promo (opcional)" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></div>
+    <div class="space-y-4 mb-6"><input type="text" placeholder="Nombre del producto" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><select id="modal-prod-marca" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option value="">Seleccionar marca...</option></select><input type="text" placeholder="Modelo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="text" placeholder="SKU" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><select class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white"><option>Smartphones</option><option>Televisores</option><option>Audio</option><option>Electrohogar</option><option>Accesorios</option><option>Smart Home</option></select><input type="number" placeholder="PVP Full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"><input type="number" placeholder="PVP Promo (opcional)" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></div>
     <div class="flex gap-3"><button onclick="closeModal('modal-prod')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="closeModal('modal-prod')" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Guardar</button></div>
   </div>
 </div>
@@ -445,13 +532,53 @@
   </div>
 </div>
 
+<div id="modal-contact-seller" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-contact-seller')">
+  <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl">
+    <h3 class="font-display text-xl font-bold mb-4">Contactar Seller</h3>
+    <div class="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+      <p class="text-[12px] text-red-900 font-medium">
+        <span id="modal-contact-seller-name" class="font-bold">Garbarino</span> · <span id="modal-contact-seller-platform">VTEX</span>
+      </p>
+      <p class="text-[11px] text-red-700 mt-1">
+        -8% hace 4 días · 3ª violación en 30 días
+      </p>
+    </div>
+    <div class="space-y-3 mb-4">
+      <label class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-2 rounded">
+        <input type="radio" name="contact-channel" value="email" checked class="w-4 h-4">
+        <span class="text-sm font-medium">Email</span>
+      </label>
+      <label class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-2 rounded">
+        <input type="radio" name="contact-channel" value="whatsapp" class="w-4 h-4">
+        <span class="text-sm font-medium">WhatsApp</span>
+      </label>
+      <label class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-2 rounded">
+        <input type="radio" name="contact-channel" value="phone" class="w-4 h-4">
+        <span class="text-sm font-medium">Teléfono</span>
+      </label>
+      <label class="flex items-center gap-3 cursor-pointer hover:bg-slate-50 p-2 rounded">
+        <input type="radio" name="contact-channel" value="internal" class="w-4 h-4">
+        <span class="text-sm font-medium">Escalar a Comercial</span>
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="block text-[12px] font-medium text-slate-600 mb-1.5">Nota (opcional):</label>
+      <textarea placeholder="Ej: Conversado con gerente, corrige en 24h..." class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm resize-none" rows="3"></textarea>
+    </div>
+    <div class="flex gap-3">
+      <button onclick="closeModal('modal-contact-seller')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium hover:bg-slate-50">Cancelar</button>
+      <button onclick="markAsContacted()" class="flex-1 bg-emerald-600 text-white rounded-lg py-2.5 text-sm font-bold hover:bg-emerald-700">✓ Marcar contactado</button>
+    </div>
+  </div>
+</div>
+
 <div id="modal-edit-price" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-edit-price')">
   <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Editar precio</h3>
     <p id="edit-prod-name" class="text-[12px] text-slate-600 mb-4">Producto</p>
     <div class="space-y-4 mb-6"><label class="block"><span class="text-[12px] font-medium text-slate-600 mb-1.5 block">PVP Full</span><input type="number" id="edit-pvp-full" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></label><label class="block"><span class="text-[12px] font-medium text-slate-600 mb-1.5 block">PVP Promo (opcional)</span><input type="number" id="edit-pvp-promo" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm"></label></div>
     <div class="flex gap-3"><button onclick="closeModal('modal-edit-price')" class="flex-1 border border-slate-200 rounded-lg py-2.5 text-sm font-medium">Cancelar</button><button onclick="closeModal('modal-edit-price')" class="flex-1 bg-slate-800 text-white rounded-lg py-2.5 text-sm font-medium">Guardar</button></div>
   </div>
-</div>
+
 
 <div id="modal-edit-product" class="modal-wrap fixed inset-0 z-50 bg-black/40 items-center justify-center p-4" onclick="if(event.target===this)closeModal('modal-edit-product')">
   <div class="bg-white rounded-2xl w-full max-w-md p-6 shadow-xl"><h3 class="font-display text-xl font-bold mb-4">Editar usuario</h3>
@@ -541,13 +668,50 @@ const PRODS_ARCH=PRODS.filter(p=>p.st==='archivado');
 const PRODS_ACT=PRODS.filter(p=>p.st==='activo');
 const SELS=[{n:'Frávega',u:'https://www.fravega.com'},{n:'Garbarino',u:'https://www.garbarino.com'},{n:'Musimundo',u:'https://www.musimundo.com'}];
 const CATS=['Smartphones','Televisores','Audio','Electrohogar','Accesorios','Smart Home'];
+const MARCAS=['Samsung','LG','Sony','Philips','Bose'];
 const CHANS=['Mercado Libre','Tienda Nube','VTEX','Tienda propia','Banco Provincia'];
 const SEGS=[{p:'Galaxy S24 128GB',s:'Garbarino',c:'Mercado Libre',i:'8h',alert:true},{p:'Galaxy S24 128GB',s:'Musimundo',c:'Mercado Libre',i:'12h',alert:true},{p:'Neo QLED 55"',s:'Musimundo',c:'Tienda Nube',i:'8h',alert:true}];
 const USERS=[{n:'Lucas Martínez',e:'lucas@samsung.com.ar',r:'Admin',s:'Activo'},{n:'María García',e:'maria@samsung.com.ar',r:'Manager',s:'Activo'},{n:'Carlos López',e:'carlos@samsung.com.ar',r:'Analyst',s:'Activo'},{n:'Ana Rodríguez',e:'ana@samsung.com.ar',r:'Viewer',s:'Invitación pendiente'}];
 
-document.getElementById('prod-body').innerHTML=PRODS_ACT.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button title="Pausar por falta de stock" class="text-slate-400 hover:text-amber-600 text-[12px] font-medium">⏸ Pausar</button><button title="Archivar (agotado)" class="text-slate-400 hover:text-red-600 text-[12px] font-medium">📦 Archivar</button></td></tr>`).join('');
+const SCORING={
+  '30':[
+    {n:'Frávega',u:'https://www.fravega.com',tc:94,vc:0.6,id:1.8,ri:8},
+    {n:'Garbarino',u:'https://www.garbarino.com',tc:78,vc:2.1,id:7.5,ri:32},
+    {n:'Musimundo',u:'https://www.musimundo.com',tc:68,vc:3.8,id:14.2,ri:52}
+  ],
+  '90':[
+    {n:'Frávega',u:'https://www.fravega.com',tc:92,vc:0.8,id:2.1,ri:10},
+    {n:'Garbarino',u:'https://www.garbarino.com',tc:76,vc:2.5,id:8.3,ri:35},
+    {n:'Musimundo',u:'https://www.musimundo.com',tc:64,vc:4.2,id:15.7,ri:58}
+  ],
+  '180':[
+    {n:'Frávega',u:'https://www.fravega.com',tc:90,vc:1.2,id:2.8,ri:12},
+    {n:'Garbarino',u:'https://www.garbarino.com',tc:74,vc:2.8,id:9.1,ri:38},
+    {n:'Musimundo',u:'https://www.musimundo.com',tc:62,vc:4.5,id:16.3,ri:61}
+  ]
+};
 
-document.getElementById('prod-arch-body').innerHTML=PRODS_ARCH.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button class="text-slate-400 hover:text-emerald-600 text-[12px] font-medium">♻️ Desarchivar</button></td></tr>`).join('');
+const TIMELINE_DATA={
+  'Frávega':{
+    '30':{episodes:[{start:'07-ago',end:'08-ago',startDay:7,endDay:8,days:2,avgDev:-1.8,maxDev:-2.1},{start:'22-ago',end:'23-ago',startDay:22,endDay:23,days:2,avgDev:-1.5,maxDev:-2.0}],totalBreachDays:4,avgDeviation:-1.7,maxDeviation:-2.1,pattern:'Sin patrón, episodios aislados'},
+    '90':{episodes:[{start:'05-jul',end:'06-jul',startDay:5,endDay:6,days:2,avgDev:-1.8,maxDev:-2.1},{start:'22-jul',end:'24-jul',startDay:22,endDay:24,days:3,avgDev:-2.0,maxDev:-2.4},{start:'07-ago',end:'08-ago',startDay:37,endDay:38,days:2,avgDev:-1.8,maxDev:-2.1},{start:'22-ago',end:'23-ago',startDay:52,endDay:53,days:2,avgDev:-1.5,maxDev:-2.0}],totalBreachDays:9,avgDeviation:-1.8,maxDeviation:-2.4,pattern:'Aislados, ~1 episodio cada 20 días'},
+    '180':{episodes:[{start:'10-may',end:'11-may',startDay:10,endDay:11,days:2,avgDev:-1.6,maxDev:-2.0},{start:'22-jun',end:'24-jun',startDay:43,endDay:45,days:3,avgDev:-1.9,maxDev:-2.3},{start:'05-jul',end:'06-jul',startDay:56,endDay:57,days:2,avgDev:-1.8,maxDev:-2.1},{start:'22-jul',end:'24-jul',startDay:73,endDay:75,days:3,avgDev:-2.0,maxDev:-2.4},{start:'07-ago',end:'08-ago',startDay:89,endDay:90,days:2,avgDev:-1.8,maxDev:-2.1},{start:'22-ago',end:'23-ago',startDay:104,endDay:105,days:2,avgDev:-1.5,maxDev:-2.0}],totalBreachDays:16,avgDeviation:-1.8,maxDeviation:-2.4,pattern:'Muy confiable, errores aislados'}
+  },
+  'Garbarino':{
+    '30':{episodes:[{start:'03-ago',end:'11-ago',startDay:3,endDay:11,days:9,avgDev:-6.2,maxDev:-8.5},{start:'18-ago',end:'26-ago',startDay:18,endDay:26,days:9,avgDev:-7.1,maxDev:-9.2}],totalBreachDays:18,avgDeviation:-6.7,maxDeviation:-9.2,pattern:'Patrón recurrente ~9 días'},
+    '90':{episodes:[{start:'01-jul',end:'09-jul',startDay:1,endDay:9,days:9,avgDev:-5.8,maxDev:-7.9},{start:'18-jul',end:'27-jul',startDay:18,endDay:27,days:10,avgDev:-6.5,maxDev:-8.7},{start:'03-ago',end:'11-ago',startDay:34,endDay:42,days:9,avgDev:-6.2,maxDev:-8.5},{start:'18-ago',end:'26-ago',startDay:49,endDay:57,days:9,avgDev:-7.1,maxDev:-9.2}],totalBreachDays:37,avgDeviation:-6.4,maxDeviation:-9.2,pattern:'Muy recurrente: ciclos de ~9-10 días, indicador de política deliberada'},
+    '180':{episodes:[{start:'08-may',end:'17-may',startDay:8,endDay:17,days:10,avgDev:-5.5,maxDev:-7.5},{start:'25-may',end:'03-jun',startDay:25,endDay:34,days:10,avgDev:-6.0,maxDev:-8.1},{start:'01-jul',end:'09-jul',startDay:52,endDay:60,days:9,avgDev:-5.8,maxDev:-7.9},{start:'18-jul',end:'27-jul',startDay:69,endDay:78,days:10,avgDev:-6.5,maxDev:-8.7},{start:'03-ago',end:'11-ago',startDay:85,endDay:93,days:9,avgDev:-6.2,maxDev:-8.5},{start:'18-ago',end:'26-ago',startDay:100,endDay:108,days:9,avgDev:-7.1,maxDev:-9.2}],totalBreachDays:57,avgDeviation:-6.2,maxDeviation:-9.2,pattern:'Patrón recurrente perfecto, ~10 días cada ciclo'}
+  },
+  'Musimundo':{
+    '30':{episodes:[{start:'01-ago',end:'30-ago',startDay:1,endDay:30,days:30,avgDev:-14.5,maxDev:-23.2}],totalBreachDays:30,avgDeviation:-14.5,maxDeviation:-23.2,pattern:'Incumplimiento casi permanente'},
+    '90':{episodes:[{start:'01-jul',end:'30-ago',startDay:1,endDay:61,days:61,avgDev:-15.2,maxDev:-23.2}],totalBreachDays:61,avgDeviation:-15.2,maxDeviation:-23.2,pattern:'Incumplimiento casi permanente con picos severos'},
+    '180':{episodes:[{start:'10-may',end:'31-ago',startDay:10,endDay:114,days:114,avgDev:-15.8,maxDev:-24.1}],totalBreachDays:114,avgDeviation:-15.8,maxDeviation:-24.1,pattern:'Incumplimiento estructural, riesgo permanente'}
+  }
+};
+
+document.getElementById('prod-body').innerHTML=PRODS_ACT.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]"><span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p.c}</span></td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button title="Pausar por falta de stock" class="text-slate-400 hover:text-amber-600 text-[12px] font-medium">⏸ Pausar</button><button title="Archivar (agotado)" class="text-slate-400 hover:text-red-600 text-[12px] font-medium">📦 Archivar</button></td></tr>`).join('');
+
+document.getElementById('prod-arch-body').innerHTML=PRODS_ARCH.map(p=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${p.n}</td><td class="px-3 py-3 text-[12px]">${p.mar}</td><td class="px-3 py-3 text-[12px]">${p.mod}</td><td class="px-3 py-3 text-[12px]"><span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${p.c}</span></td><td class="px-3 py-3 text-[12px]">${p.s}</td><td class="px-3 py-3 text-right nums">$${p.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${p.pp?'$'+p.pp.toLocaleString('es-AR'):'—'}</td><td class="px-5 py-3 text-right flex justify-end gap-2"><button onclick="editPrice('${p.n}',${p.pf},${p.pp||'null'})" class="text-slate-400 hover:text-blue-600 text-[12px] font-medium">✏️ Editar</button><button class="text-slate-400 hover:text-emerald-600 text-[12px] font-medium">♻️ Desarchivar</button></td></tr>`).join('');
 
 document.getElementById('seller-body').innerHTML=SELS.map(s=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${s.n}</td><td class="px-5 py-3 text-slate-500 text-[12px]">${s.u}</td></tr>`).join('');
 
@@ -563,8 +727,229 @@ function editPrice(prodName,pf,pp){document.getElementById('edit-prod-name').tex
 function editUser(name,email,role){document.getElementById('edit-user-name').value=name;document.getElementById('edit-user-email').value=email;document.getElementById('edit-user-role').value=role;openModal('modal-edit-product');}
 function exportTemplate(){const headers=['Nombre','Marca','Modelo','SKU','Categoría','PVP Full','PVP Promo'];const csv=[headers.join(','),...PRODS_ACT.map(p=>[p.n,p.mar,p.mod,p.s,p.c,p.pf,p.pp||''].join(','))].join('\n');const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='plantilla-precios.csv';a.click();}
 function filterBySKU(query){const rows=document.querySelectorAll('#import-history tr');rows.forEach(row=>{const sku=row.textContent.toLowerCase();row.style.display=query===''||sku.includes(query.toLowerCase())?'':'none';});}
-function showTab(tabId){document.querySelectorAll('.tab-prod').forEach(t=>t.classList.add('hidden'));document.getElementById(tabId).classList.remove('hidden');}
+function showTab(tabId){
+  document.querySelectorAll('.tab-prod').forEach(t=>t.classList.add('hidden'));
+  document.getElementById(tabId).classList.remove('hidden');
+  document.querySelectorAll('[id^="tab-"][id$="-btn"]').forEach(btn=>{
+    btn.classList.remove('border-slate-800','text-slate-900');
+    btn.classList.add('border-transparent','text-slate-600');
+  });
+  const activeBtn=document.getElementById('tab-'+tabId.replace('prod-','')+'-btn');
+  if(activeBtn){
+    activeBtn.classList.remove('border-transparent','text-slate-600');
+    activeBtn.classList.add('border-slate-800','text-slate-900');
+  }
+}
+
+function showCategoryTab(type){
+  document.querySelectorAll('.tab-catmarca').forEach(t=>t.classList.add('hidden'));
+  document.getElementById('tab-'+type).classList.remove('hidden');
+  document.querySelectorAll('[id^="tab-"][id$="-btn"]').forEach(btn=>{
+    if(btn.id.startsWith('tab-cat')||btn.id.startsWith('tab-marca')){
+      btn.classList.remove('border-slate-800','text-slate-900');
+      btn.classList.add('border-transparent','text-slate-600');
+    }
+  });
+  document.getElementById('tab-'+type+'-btn').classList.remove('border-transparent','text-slate-600');
+  document.getElementById('tab-'+type+'-btn').classList.add('border-slate-800','text-slate-900');
+}
+
+function renderCategories(){
+  const html=CATS.map((cat,i)=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${cat}</td><td class="px-5 py-3 text-right"><button class="text-blue-600 hover:text-blue-700 text-[12px] font-medium">✏️ Editar</button></td></tr>`).join('');
+  document.getElementById('cat-body').innerHTML=html;
+}
+
+function renderBrands(){
+  const html=MARCAS.map((marca,i)=>`<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${marca}</td><td class="px-5 py-3 text-right"><button class="text-blue-600 hover:text-blue-700 text-[12px] font-medium">✏️ Editar</button></td></tr>`).join('');
+  document.getElementById('marca-body').innerHTML=html;
+}
+
+function populateMarcaDropdown(){
+  const select=document.getElementById('modal-prod-marca');
+  if(select){
+    select.innerHTML='<option value="">Seleccionar marca...</option>'+MARCAS.map(m=>`<option value="${m}">${m}</option>`).join('');
+  }
+}
+
+function renderSeguimientos(){
+  const html=SEGS.map((seg,i)=>{
+    const prod=PRODS.find(p=>p.n===seg.p);
+    if(!prod) return '';
+    return `<tr class="hover:bg-slate-50"><td class="px-5 py-3 font-medium">${prod.n}</td><td class="px-3 py-3 text-[12px]">${prod.mar}</td><td class="px-3 py-3 text-[12px]">${prod.mod}</td><td class="px-3 py-3 text-[12px]"><span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded">${prod.c}</span></td><td class="px-3 py-3 text-[12px]">${prod.s}</td><td class="px-3 py-3 text-right nums">$${prod.pf.toLocaleString('es-AR')}</td><td class="px-3 py-3 text-right nums">${prod.pp?'$'+prod.pp.toLocaleString('es-AR'):'—'}</td><td class="px-3 py-3 font-medium">${seg.s}</td><td class="px-3 py-3 font-medium">${seg.c}</td><td class="px-3 py-3 text-center"><button class="text-blue-600 hover:text-blue-700 text-lg font-medium" title="Configurar alertas">🔔</button></td></tr>`;
+  }).join('');
+  document.getElementById('seg-body').innerHTML=html;
+}
+
+function getScoreBadge(tc,ri){if(tc>=85&&ri<20)return{badge:'CONFIABLE',color:'emerald'};if(tc<60||ri>50)return{badge:'REINCIDENTE',color:'red'};return{badge:'OCASIONAL',color:'amber'};}
+function getVCLabel(vc){if(vc<1)return{label:'Proactivo',color:'emerald'};if(vc<=3)return{label:'Reactivo',color:'amber'};return{label:'Lento',color:'red'};}
+function getIDLabel(id){if(id<5)return{label:'Mínima',color:'emerald'};if(id<=15)return{label:'Moderada',color:'amber'};return{label:'Severa',color:'red'};}
+function getRILabel(ri){if(ri<20)return{label:'Baja',color:'emerald'};if(ri<=50)return{label:'Media',color:'amber'};return{label:'Alta',color:'red'};}
+function getTCLabel(tc){if(tc>=85)return'Excelente';if(tc>=70)return'Bueno';return'Deficiente';}
+
+function renderScoring(period){
+  const data=SCORING[period].sort((a,b)=>b.tc-a.tc);
+  document.getElementById('scoring-container').innerHTML=data.map(s=>{
+    const badge=getScoreBadge(s.tc,s.ri);
+    const vcL=getVCLabel(s.vc);
+    const idL=getIDLabel(s.id);
+    const riL=getRILabel(s.ri);
+    const tcL=getTCLabel(s.tc);
+    return `<div class="bg-white rounded-xl border border-slate-200 p-5">
+      <div class="flex items-start justify-between mb-4">
+        <div><h3 class="font-semibold text-[14px]">${s.n}</h3><p class="text-[11px] text-slate-500 mt-1">${s.u}</p></div>
+        <span class="text-[11px] font-bold px-3 py-1.5 rounded-full bg-${badge.color}-100 text-${badge.color}-700">${badge.badge}</span>
+      </div>
+      <div class="grid grid-cols-4 gap-3">
+        <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+          <div class="text-[11px] font-medium text-slate-600 mb-1">Tasa Cumpl.</div>
+          <div class="font-display font-bold text-lg">${s.tc}%</div>
+          <div class="text-[10px] text-slate-500 mt-1">${tcL}</div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+          <div class="text-[11px] font-medium text-slate-600 mb-1">Vel. Correc.</div>
+          <div class="font-display font-bold text-lg">${s.vc.toFixed(1)}d</div>
+          <div class="text-[10px] text-${vcL.color}-600 font-medium">${vcL.label}</div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+          <div class="text-[11px] font-medium text-slate-600 mb-1">Intens. Desv.</div>
+          <div class="font-display font-bold text-lg">${s.id.toFixed(1)}%</div>
+          <div class="text-[10px] text-${idL.color}-600 font-medium">${idL.label}</div>
+        </div>
+        <div class="bg-slate-50 rounded-lg p-3 border border-slate-100">
+          <div class="text-[11px] font-medium text-slate-600 mb-1">Reincidencia</div>
+          <div class="font-display font-bold text-lg">${s.ri}%</div>
+          <div class="text-[10px] text-${riL.color}-600 font-medium">${riL.label}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function updateScoringPeriod(period){renderScoring(period);}
+
+function updateTimeline(){
+  const seller=document.getElementById('timeline-seller').value;
+  const period=document.getElementById('timeline-period').value;
+  const data=TIMELINE_DATA[seller][period];
+  document.getElementById('tl-days-breach').textContent=data.totalBreachDays+' días';
+  document.getElementById('tl-avg-deviation').textContent=data.avgDeviation.toFixed(1)+'%';
+  document.getElementById('tl-max-deviation').textContent=data.maxDeviation.toFixed(1)+'%';
+  document.getElementById('tl-pattern').textContent=data.pattern;
+  renderTimelineChart(seller,period,data);
+  renderTimelineTable(data.episodes);
+}
+
+function openContactModal(seller,platform){
+  document.getElementById('modal-contact-seller-name').textContent=seller;
+  document.getElementById('modal-contact-seller-platform').textContent=platform;
+  openModal('modal-contact-seller');
+}
+
+function markAsContacted(){
+  alert('✓ Contacto registrado con Garbarino');
+  closeModal('modal-contact-seller');
+}
+
+function renderSellerDeviationTable(){
+  const sellers=[
+    {name:'Garbarino',platform:'VTEX',deviation:-8,days:4,reincidence:'3ª en 30d',velCorr:2.3,recommendation:'ESCALAR',status:'Pendiente'}
+  ];
+  const html=sellers.map(s=>`
+    <div class="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer hover:bg-slate-50" onclick="openContactModal('${s.name}','${s.platform}')">
+      <div class="flex items-start justify-between gap-4 mb-3">
+        <div class="flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="inline-block w-2 h-2 rounded-full ${s.deviation<=-8?'bg-red-600':s.deviation<=-5?'bg-yellow-600':'bg-green-600'}"></span>
+            <span class="font-bold text-sm">${s.name}</span>
+            <span class="text-slate-500">·</span>
+            <span class="text-slate-600 text-sm">${s.platform}</span>
+          </div>
+          <div class="flex gap-4 mt-2">
+            <div>
+              <p class="text-[11px] text-slate-500">Desvío</p>
+              <p class="font-bold text-sm">${s.deviation}%</p>
+            </div>
+            <div>
+              <p class="text-[11px] text-slate-500">Tiempo</p>
+              <p class="font-bold text-sm">${s.days}d</p>
+            </div>
+            <div>
+              <p class="text-[11px] text-slate-500">Reincidencia</p>
+              <p class="font-bold text-sm">${s.reincidence}</p>
+            </div>
+            <div>
+              <p class="text-[11px] text-slate-500">Vel. Corrección</p>
+              <p class="font-bold text-sm">${s.velCorr}d</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-right">
+          <span class="inline-block bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold mb-2">${s.recommendation}</span>
+          <p class="text-[11px] text-slate-600">${s.status}</p>
+        </div>
+      </div>
+      <div class="flex gap-2 pt-3 border-t border-slate-200">
+        <button onclick="event.stopPropagation(); openContactModal('${s.name}','${s.platform}')" class="flex-1 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 py-2 rounded transition-colors">
+          → CONTACTAR
+        </button>
+        <button onclick="event.stopPropagation(); nav(document.querySelector('[data-view=timeline]'))" class="flex-1 text-xs font-semibold text-slate-600 border border-slate-300 hover:border-slate-400 py-2 rounded transition-colors">
+          Timeline
+        </button>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('sellers-deviation-table').innerHTML=html;
+}
+
+function renderTimelineChart(seller,period,data){
+  const width=800,height=300,margin={l:50,r:50,t:30,b:50};
+  const chartW=width-margin.l-margin.r,chartH=height-margin.t-margin.b;
+  const pvp=1200000,tolerance=0.05;
+  const breachLine=pvp*(1-tolerance);
+  let svg=`<svg viewBox="0 0 ${width} ${height}" style="width:100%;height:100%" class="border border-slate-200 rounded-lg bg-gradient-to-br from-slate-50 to-white">`;
+  svg+=`<defs><linearGradient id="compliantZone" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#d1fae5;stop-opacity:0.4" /><stop offset="100%" style="stop-color:#d1fae5;stop-opacity:0.1" /></linearGradient><linearGradient id="breachZone" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fee2e2;stop-opacity:0.4" /><stop offset="100%" style="stop-color:#fee2e2;stop-opacity:0.1" /></linearGradient></defs>`;
+  svg+=`<rect x="${margin.l}" y="${margin.t}" width="${chartW}" height="${chartH/2}" fill="url(#compliantZone)"/>`;
+  svg+=`<rect x="${margin.l}" y="${margin.t+chartH/2}" width="${chartW}" height="${chartH/2}" fill="url(#breachZone)"/>`;
+  svg+=`<line x1="${margin.l}" y1="${margin.t+chartH/2}" x2="${margin.l+chartW}" y2="${margin.t+chartH/2}" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4"/>`;
+  svg+=`<text x="${width-120}" y="${margin.t+chartH/2-5}" font-size="11" fill="#0284c7" font-weight="600">PVP Aceptable</text>`;
+  let maxPrice=1400000,minPrice=900000;
+  const daysCount=parseInt(period);
+  for(let i=0;i<daysCount;i++){
+    const x=margin.l+(i/daysCount)*chartW;
+    if(i%Math.max(1,Math.floor(daysCount/6))===0){
+      svg+=`<line x1="${x}" y1="${margin.t+chartH}" x2="${x}" y2="${margin.t+chartH+5}" stroke="#cbd5e1"/>`;
+      svg+=`<text x="${x}" y="${margin.t+chartH+20}" font-size="9" fill="#94a3b8" text-anchor="middle">${i}d</text>`;
+    }
+  }
+  let pricePoints=``;
+  for(let i=0;i<daysCount;i++){
+    let price;
+    let inBreach=false;
+    for(let ep of data.episodes){
+      if(i>=ep.startDay&&i<=ep.endDay){inBreach=true;break;}
+    }
+    if(inBreach){price=pvp*(1+data.avgDeviation/100);}else{price=pvp;}
+    const y=margin.t+chartH-(((price-minPrice)/(maxPrice-minPrice))*chartH);
+    pricePoints+=`${margin.l+(i/daysCount)*chartW},${y} `;
+  }
+  svg+=`<polyline points="${pricePoints}" stroke="#ef4444" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  svg+=`<text x="20" y="${margin.t+15}" font-size="12" fill="#1e293b" font-weight="600">Precio (ARS)</text>`;
+  svg+=`<text x="20" y="${margin.t+chartH+margin.b-20}" font-size="12" fill="#1e293b" font-weight="600">Días</text>`;
+  svg+=`</svg>`;
+  document.getElementById('timeline-chart').innerHTML=svg;
+}
+
+function renderTimelineTable(episodes){
+  document.getElementById('timeline-episodes').innerHTML=episodes.map((ep,i)=>`<tr class="hover:bg-slate-50"><td class="px-4 py-3">#${i+1}</td><td class="px-4 py-3 text-[12px]">${ep.start} — ${ep.end}</td><td class="px-4 py-3 text-right">${ep.days} días</td><td class="px-4 py-3 text-right font-medium">${Math.abs(ep.avgDev).toFixed(1)}%</td><td class="px-4 py-3 text-right font-medium text-red-600">${Math.abs(ep.maxDev).toFixed(1)}%</td></tr>`).join('');
+}
 function updateDashboard(cat){const dashData={'':{comp:83,dev:1,sell:1,sku:1,plat:'VTEX',skuName:'SM-S24',seller:'Garbarino'},Smartphones:{comp:85,dev:0,sell:0,sku:0,plat:'—',skuName:'—',seller:'—'},Televisores:{comp:79,dev:2,sell:2,sku:2,plat:'VTEX, Tienda Nube',skuName:'QN55',seller:'Garbarino, Musimundo'},Audio:{comp:91,dev:0,sell:0,sku:0,plat:'—',skuName:'—',seller:'—'},Electrohogar:{comp:88,dev:1,sell:1,sku:1,plat:'ML',skuName:'XYZ123',seller:'Frávega'}};const d=dashData[cat]||dashData[''];document.querySelectorAll('[data-comp]').forEach(el=>{if(el.dataset.comp==='comp')el.textContent=d.comp+'%';else if(el.dataset.comp==='dev')el.textContent=d.dev;else if(el.dataset.comp==='sell')el.textContent=d.sell;else if(el.dataset.comp==='sku')el.textContent=d.sku;else if(el.dataset.comp==='plat')el.textContent=d.plat;else if(el.dataset.comp==='skuName')el.textContent=d.skuName;else if(el.dataset.comp==='seller')el.textContent=d.seller;});}
+renderScoring('90');
+renderSellerDeviationTable();
+renderCategories();
+renderBrands();
+renderSeguimientos();
+populateMarcaDropdown();
+updateTimeline();
 updateDashboard('');
 </script>
 </body>
