@@ -1,0 +1,338 @@
+[
+  {
+    "model": "tenants.tenant",
+    "pk": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "fields": {
+      "name": "Samsung Argentina",
+      "slug": "samsung-argentina",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "plan": "professional",
+      "active": true,
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tenants.user",
+    "pk": "10000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "email": "admin@samsung.com.ar",
+      "password": "pbkdf2_sha256$720000$salt123abc$dGVzdGhhc2hlZHBhc3N3b3Jk",
+      "name": "Lucas Admin",
+      "role": "admin",
+      "status": "active",
+      "is_staff": true,
+      "is_active": true,
+      "is_superuser": false,
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tenants.user",
+    "pk": "10000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "email": "manager@samsung.com.ar",
+      "password": "pbkdf2_sha256$720000$salt123abc$dGVzdGhhc2hlZHBhc3N3b3Jk",
+      "name": "María Manager",
+      "role": "manager",
+      "status": "active",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "tenants.user",
+    "pk": "10000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "email": "analyst@samsung.com.ar",
+      "password": "pbkdf2_sha256$720000$salt123abc$dGVzdGhhc2hlZHBhc3N3b3Jk",
+      "name": "Carlos Analyst",
+      "role": "analyst",
+      "status": "active",
+      "is_staff": false,
+      "is_active": true,
+      "is_superuser": false,
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "brands.brand",
+    "pk": "b0000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Samsung",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "brands.brand",
+    "pk": "b0000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Apple",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "brands.brand",
+    "pk": "b0000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "LG",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "brands.brand",
+    "pk": "b0000004-0000-0000-0000-000000000004",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Sony",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "brands.brand",
+    "pk": "b0000005-0000-0000-0000-000000000005",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Motorola",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Smartphones",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Televisores",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Audio",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000004-0000-0000-0000-000000000004",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Tablets",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000005-0000-0000-0000-000000000005",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Wearables",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "categories.category",
+    "pk": "c0000006-0000-0000-0000-000000000006",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Electrodomésticos",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "channels.channel",
+    "pk": "c1000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Mercado Libre",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "channels.channel",
+    "pk": "c1000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Tienda Oficial",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "channels.channel",
+    "pk": "c1000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "E-commerce Propio",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "channels.channel",
+    "pk": "c1000004-0000-0000-0000-000000000004",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Retail Físico",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "channels.channel",
+    "pk": "c1000005-0000-0000-0000-000000000005",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "VTEX",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "sellers.seller",
+    "pk": "50000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Frávega",
+      "url": "https://www.fravega.com",
+      "contact_email": "comercial@fravega.com",
+      "contact_phone": "+5411-4000-0001",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "sellers.seller",
+    "pk": "50000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Garbarino",
+      "url": "https://www.garbarino.com",
+      "contact_email": "comercial@garbarino.com",
+      "contact_phone": "+5411-4000-0002",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "sellers.seller",
+    "pk": "50000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Musimundo",
+      "url": "https://www.musimundo.com",
+      "contact_email": "comercial@musimundo.com",
+      "contact_phone": "+5411-4000-0003",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "d0000001-0000-0000-0000-000000000001",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Galaxy S24 128GB",
+      "brand": "b0000001-0000-0000-0000-000000000001",
+      "model": "S24",
+      "category": "c0000001-0000-0000-0000-000000000001",
+      "sku": "SM-S24-128",
+      "pvp_full": 1199000,
+      "pvp_promo": 999000,
+      "status": "active",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "d0000002-0000-0000-0000-000000000002",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Neo QLED 55\" 4K",
+      "brand": "b0000001-0000-0000-0000-000000000001",
+      "model": "QN55QN85C",
+      "category": "c0000002-0000-0000-0000-000000000002",
+      "sku": "TV-QN55QN85C",
+      "pvp_full": 2499000,
+      "pvp_promo": null,
+      "status": "active",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": "d0000003-0000-0000-0000-000000000003",
+    "fields": {
+      "tenant": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "name": "Soundbar HW-Q990C",
+      "brand": "b0000001-0000-0000-0000-000000000001",
+      "model": "HW-Q990C",
+      "category": "c0000003-0000-0000-0000-000000000003",
+      "sku": "SB-HWQ990C",
+      "pvp_full": 899000,
+      "pvp_promo": 799000,
+      "status": "active",
+      "created_at": "2026-07-01T00:00:00Z",
+      "updated_at": "2026-07-01T00:00:00Z",
+      "updated_by": null
+    }
+  }
+]

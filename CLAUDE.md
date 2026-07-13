@@ -447,7 +447,7 @@ from apps.products.models import Product
 from apps.products.serializers import ProductSerializer
 
 class ProductViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = []
     serializer_class = ProductSerializer
     
     def get_queryset(self):
@@ -745,4 +745,3 @@ def test_my_function():
 4. Ejecutar Sesión 4 (genera tests + deploy config)
 5. Deploy a Railway
 6. Fase 2: Scraping + Seguimiento
-
