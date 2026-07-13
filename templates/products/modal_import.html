@@ -1,0 +1,105 @@
+<!-- Modal: Importar Excel -->
+<script>
+function openImportModal() {
+    document.getElementById('modal-container').innerHTML = `
+    <div class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-lg fade-in" onclick="event.stopPropagation()">
+            <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <h3 class="text-lg font-semibold text-gray-900">Importar Productos</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <div id="import-upload" class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-primary-400 transition-colors cursor-pointer" onclick="document.getElementById('import-file').click()">
+                    <svg class="mx-auto w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                    <p class="text-sm text-gray-600 font-medium">Click para seleccionar archivo Excel</p>
+                    <p class="text-xs text-gray-400 mt-1">Formato: .xlsx con columnas Nombre, Marca, Modelo, SKU, Categoría, PVP Full, PVP Promo</p>
+                    <input type="file" id="import-file" accept=".xlsx,.xls" class="hidden" onchange="handleImportFile(this)">
+                </div>
+                <div id="import-preview" class="hidden space-y-3">
+                    <div id="import-stats" class="flex gap-3"></div>
+                    <div class="overflow-x-auto max-h-48 border rounded-lg">
+                        <table class="min-w-full text-xs">
+                            <thead class="bg-gray-50 sticky top-0"><tr id="import-preview-head"></tr></thead>
+                            <tbody id="import-preview-body"></tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-end gap-3">
+                        <button onclick="closeModal()" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">Cancelar</button>
+                        <button id="confirm-import-btn" onclick="confirmImport()" class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700">Confirmar importación</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
+}
+
+let importSessionId = null;
+
+async function handleImportFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const headers = {};
+    const token = localStorage.getItem('access_token');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+
+    const res = await fetch('/api/v1/products/import_products/', {
+        method: 'POST',
+        headers: headers,
+        body: formData,
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+        showToast(data.error?.message || 'Error al importar', 'error');
+        return;
+    }
+
+    const result = data.data || data;
+    importSessionId = result.session_id;
+
+    document.getElementById('import-upload').classList.add('hidden');
+    document.getElementById('import-preview').classList.remove('hidden');
+
+    document.getElementById('import-stats').innerHTML = `
+        <span class="px-3 py-1 bg-gray-100 rounded-full text-xs font-medium">Total: ${result.total_rows}</span>
+        <span class="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-medium">Válidos: ${result.valid_rows}</span>
+        ${result.error_rows > 0 ? `<span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-medium">Errores: ${result.error_rows}</span>` : ''}
+    `;
+
+    const preview = result.preview || [];
+    document.getElementById('import-preview-head').innerHTML = '<th class="px-2 py-1">#</th><th class="px-2 py-1">Nombre</th><th class="px-2 py-1">Marca</th><th class="px-2 py-1">SKU</th><th class="px-2 py-1">Estado</th>';
+    document.getElementById('import-preview-body').innerHTML = preview.map(r => `
+        <tr class="${r.status === 'error' ? 'bg-red-50' : ''}">
+            <td class="px-2 py-1">${r.row}</td>
+            <td class="px-2 py-1">${r.name}</td>
+            <td class="px-2 py-1">${r.brand}</td>
+            <td class="px-2 py-1">${r.sku}</td>
+            <td class="px-2 py-1">${r.status === 'valid' ? '<span class="text-emerald-600">✓</span>' : `<span class="text-red-600" title="${r.error_message}">✗</span>`}</td>
+        </tr>
+    `).join('');
+}
+
+async function confirmImport() {
+    if (!importSessionId) return;
+    const res = await fetch('/api/v1/products/import/confirm/', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ session_id: importSessionId }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+        closeModal();
+        const result = data.data || data;
+        showToast(`${result.imported} productos importados`);
+        loadProducts(1);
+    } else {
+        showToast('Error al confirmar importación', 'error');
+    }
+}
+</script>

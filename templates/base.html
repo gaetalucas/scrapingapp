@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pulso{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50:'#f8fafc', 100:'#f1f5f9', 200:'#e2e8f0', 300:'#cbd5e1', 400:'#94a3b8', 500:'#64748b', 600:'#475569', 700:'#334155', 800:'#1e293b', 900:'#0f172a' },
+                        success: '#10b981',
+                        warning: '#f59e0b',
+                        danger: '#ef4444',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        [x-cloak] { display: none !important; }
+        .htmx-indicator { display: none; }
+        .htmx-request .htmx-indicator { display: inline-block; }
+        .htmx-request.htmx-indicator { display: inline-block; }
+        .modal-backdrop { background: rgba(0,0,0,0.5); }
+        .fade-in { animation: fadeIn 0.15s ease-in; }
+        @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+        .toast { animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-in 2.7s forwards; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
+    </style>
+</head>
+<body class="h-full" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <div class="min-h-full flex">
+        {% include "includes/sidebar.html" %}
+
+        <div class="flex-1 flex flex-col">
+            {% include "includes/header.html" %}
+
+            <main class="flex-1 p-6">
+                {% block content %}{% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal container -->
+    <div id="modal-container"></div>
+
+    <!-- Toast container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        // Toast notification helper
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const colors = { success: 'bg-emerald-500', error: 'bg-red-500', warning: 'bg-amber-500' };
+            const icons = { success: '✓', error: '✗', warning: '⚠' };
+            const toast = document.createElement('div');
+            toast.className = `toast flex items-center gap-2 px-4 py-3 rounded-lg text-white text-sm font-medium shadow-lg ${colors[type] || colors.success}`;
+            toast.innerHTML = `<span>${icons[type] || icons.success}</span> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Close modal on backdrop click or Escape
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-backdrop')) {
+                document.getElementById('modal-container').innerHTML = '';
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('modal-container').innerHTML = '';
+            }
+        });
+
+        // HTMX event listeners for toasts
+        document.body.addEventListener('htmx:afterRequest', (e) => {
+            if (e.detail.successful && e.detail.xhr.status >= 200 && e.detail.xhr.status < 300) {
+                const trigger = e.detail.elt;
+                if (trigger.dataset.successMsg) {
+                    showToast(trigger.dataset.successMsg);
+                }
+            }
+        });
+
+        document.body.addEventListener('htmx:responseError', (e) => {
+            showToast('Error en la operación', 'error');
+        });
+
+        // Close modal helper
+        function closeModal() {
+            document.getElementById('modal-container').innerHTML = '';
+        }
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

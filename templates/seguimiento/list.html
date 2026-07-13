@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Seguimiento — Pulso{% endblock %}
+
+{% block content %}
+<div class="space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900">Seguimiento</h2>
+            <p class="text-sm text-gray-500 mt-1">Monitoreo de precios: Producto × Seller × Canal</p>
+        </div>
+        <button disabled class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-800 rounded-lg opacity-50 cursor-not-allowed">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Nuevo seguimiento
+        </button>
+    </div>
+
+    <!-- Info banner -->
+    <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+        <svg class="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div>
+            <p class="text-sm font-medium text-amber-800">Módulo disponible en Fase 2</p>
+            <p class="text-xs text-amber-600 mt-1">El seguimiento de precios (scraping + capturas + alertas) se habilitará en la próxima fase del proyecto.</p>
+        </div>
+    </div>
+
+    <!-- Preview table -->
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Producto</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Marca</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">SKU</th>
+                        <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase">PVP Full</th>
+                        <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase">PVP Promo</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Seller</th>
+                        <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Canal</th>
+                        <th class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase">Alertas</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    <tr class="bg-gray-50/50">
+                        <td colspan="8" class="px-4 py-12 text-center text-gray-400">
+                            <svg class="mx-auto w-12 h-12 text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                            <p class="text-sm font-medium">Aún no hay seguimientos configurados</p>
+                            <p class="text-xs mt-1">Se habilitará con el módulo de scraping en Fase 2</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

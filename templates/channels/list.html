@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Canales — Pulso{% endblock %}
+
+{% block content %}
+<div class="space-y-4">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900">Canales</h2>
+            <p class="text-sm text-gray-500 mt-1">Puertas de venta donde se monitorean precios</p>
+        </div>
+        <button onclick="openChannelForm()" class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-primary-800 rounded-lg hover:bg-primary-700">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Nuevo canal
+        </button>
+    </div>
+
+    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Nombre</th>
+                    <th class="px-4 py-3 text-center text-xs font-semibold text-gray-500 uppercase w-32">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="channels-table" class="divide-y divide-gray-100"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const CHANNEL_API = '/api/v1/channels/';
+
+    function getAuthHeaders() {
+        const token = localStorage.getItem('access_token');
+        return token ? { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } : { 'Content-Type': 'application/json' };
+    }
+
+    async function loadChannels() {
+        const res = await fetch(CHANNEL_API, { headers: getAuthHeaders() });
+        const data = await res.json();
+        const items = data.results || data.data || data || [];
+        const tbody = document.getElementById('channels-table');
+        if (!items.length) {
+            tbody.innerHTML = '<tr><td colspan="2" class="px-4 py-6 text-center text-gray-400">No hay canales</td></tr>';
+            return;
+        }
+        tbody.innerHTML = items.map(ch => `
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-sm font-medium text-gray-900">${ch.name}</td>
+                <td class="px-4 py-3 text-center">
+                    <div class="flex items-center justify-center gap-1">
+                        <button onclick="openChannelForm('${ch.id}', '${ch.name}')" class="p-1.5 text-gray-400 hover:text-primary-600 hover:bg-primary-50 rounded">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                        </button>
+                        <button onclick="deleteChannel('${ch.id}')" class="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function openChannelForm(id = null, name = '') {
+        const title = id ? 'Editar Canal' : 'Nuevo Canal';
+        document.getElementById('modal-container').innerHTML = `
+        <div class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm fade-in" onclick="event.stopPropagation()">
+                <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <h3 class="text-lg font-semibold text-gray-900">${title}</h3>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+                </div>
+                <form class="p-6 space-y-4" onsubmit="submitChannel(event, ${id ? `'${id}'` : 'null'})">
+                    <div><label class="block text-sm font-medium text-gray-700 mb-1">Nombre *</label><input type="text" name="name" required value="${name}" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"></div>
+                    <div class="flex justify-end gap-3 pt-2">
+                        <button type="button" onclick="closeModal()" class="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">Cancelar</button>
+                        <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-primary-800 rounded-lg hover:bg-primary-700">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>`;
+    }
+
+    async function submitChannel(e, id) {
+        e.preventDefault();
+        const data = { name: e.target.name.value };
+        const method = id ? 'PATCH' : 'POST';
+        const url = id ? `${CHANNEL_API}${id}/` : CHANNEL_API;
+        const res = await fetch(url, { method, headers: getAuthHeaders(), body: JSON.stringify(data) });
+        if (res.ok) { closeModal(); showToast('Guardado'); loadChannels(); }
+        else { showToast('Error al guardar', 'error'); }
+    }
+
+    async function deleteChannel(id) {
+        if (!confirm('¿Eliminar este canal?')) return;
+        await fetch(`${CHANNEL_API}${id}/`, { method: 'DELETE', headers: getAuthHeaders() });
+        showToast('Canal eliminado'); loadChannels();
+    }
+
+    loadChannels();
+</script>
+{% endblock %}

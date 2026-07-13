@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'apps.brands',
     'apps.channels',
     'apps.auth_custom',
+    'apps.frontend',
 ]
 
 MIDDLEWARE = [

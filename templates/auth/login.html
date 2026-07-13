@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Pulso</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full flex items-center justify-center p-4">
+    <div class="w-full max-w-sm">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center gap-2 mb-4">
+                <div class="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center font-bold text-white text-lg">P</div>
+                <span class="text-2xl font-bold text-gray-900 tracking-tight">Pulso</span>
+            </div>
+            <p class="text-sm text-gray-500">Inteligencia de Precios</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" name="email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="admin@samsung.com.ar">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" name="password" required class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="••••••••">
+                </div>
+                <div id="login-error" class="hidden text-sm text-red-600 bg-red-50 p-3 rounded-lg"></div>
+                <button type="submit" class="w-full px-4 py-2.5 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors">
+                    Iniciar sesión
+                </button>
+            </form>
+        </div>
+
+        <p class="text-center text-xs text-gray-400 mt-6">Pulso v1.0 — Samsung Argentina</p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const data = { email: form.email.value, password: form.password.value };
+
+            try {
+                const res = await fetch('/api/v1/auth/login/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+                const result = await res.json();
+
+                if (res.ok) {
+                    localStorage.setItem('access_token', result.access_token || result.data?.access_token);
+                    localStorage.setItem('refresh_token', result.refresh_token || result.data?.refresh_token);
+                    localStorage.setItem('user', JSON.stringify(result.user || result.data?.user));
+                    window.location.href = '/products/';
+                } else {
+                    const errDiv = document.getElementById('login-error');
+                    errDiv.classList.remove('hidden');
+                    errDiv.textContent = result.error?.message || result.detail || 'Email o contraseña inválidos';
+                }
+            } catch (err) {
+                const errDiv = document.getElementById('login-error');
+                errDiv.classList.remove('hidden');
+                errDiv.textContent = 'Error de conexión';
+            }
+        });
+
+        // Redirect if already logged in
+        if (localStorage.getItem('access_token')) {
+            window.location.href = '/products/';
+        }
+    </script>
+</body>
+</html>
