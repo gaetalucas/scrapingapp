@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.env.local
+
+# Django
+db.sqlite3
+*.sqlite3
+staticfiles/
+media/
+
+# Tests
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+
+# Docker
+.dockerignore
+
+# Node (if Tailwind build added later)
+node_modules/

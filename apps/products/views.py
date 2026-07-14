@@ -40,7 +40,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer) -> None:
         """Assign tenant and updated_by on create."""
-        serializer.save()
+        serializer.save(tenant_id=self.request.user.tenant_id)
 
     def perform_update(self, serializer) -> None:
         """Track old values and update audit log."""
