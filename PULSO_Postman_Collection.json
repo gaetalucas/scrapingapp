@@ -1,0 +1,436 @@
+{
+  "info": {
+    "_postman_id": "pulso-api-v1",
+    "name": "Pulso API - Colección Completa",
+    "description": "Colección de endpoints para testear Pulso SaaS\n\nVersiones:\n- v1.0.0 (14 Julio 2026)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    var jsonData = pm.response.json();",
+                  "    pm.environment.set('access_token', jsonData.access_token);",
+                  "    pm.environment.set('refresh_token', jsonData.refresh_token);",
+                  "    console.log('✅ Token guardado en environment');",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"lucas.gaeta@hotmail.com\",\n  \"password\": \"Password1\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/login/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh_token\": \"{{refresh_token}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/refresh/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/auth/logout/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 Productos",
+      "item": [
+        {
+          "name": "Listar Productos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products"]
+            }
+          }
+        },
+        {
+          "name": "Crear Producto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Galaxy S24 Ultra\",\n  \"sku\": \"SM-S918B-TEST-{{$timestamp}}\",\n  \"model\": \"S24 Ultra\",\n  \"brand_id\": \"REEMPLAZAR_CON_BRAND_ID\",\n  \"category_id\": \"REEMPLAZAR_CON_CATEGORY_ID\",\n  \"pvp_full\": 1299000,\n  \"pvp_promo\": 1099000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Producto",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"pvp_full\": 1199000,\n  \"pvp_promo\": 999000\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/REEMPLAZAR_CON_PRODUCT_ID/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "REEMPLAZAR_CON_PRODUCT_ID"]
+            }
+          }
+        },
+        {
+          "name": "Archivar Producto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/REEMPLAZAR_CON_PRODUCT_ID/archive/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "REEMPLAZAR_CON_PRODUCT_ID", "archive"]
+            }
+          }
+        },
+        {
+          "name": "Desarchivar Producto",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/REEMPLAZAR_CON_PRODUCT_ID/unarchive/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "REEMPLAZAR_CON_PRODUCT_ID", "unarchive"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Producto",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/REEMPLAZAR_CON_PRODUCT_ID/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "REEMPLAZAR_CON_PRODUCT_ID"]
+            }
+          }
+        },
+        {
+          "name": "Importar Productos (Excel)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "REEMPLAZAR_CON_PATH_AL_ARCHIVO.xlsx"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/import_products/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "import_products"]
+            }
+          }
+        },
+        {
+          "name": "Confirmar Importación",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"session_id\": \"REEMPLAZAR_CON_SESSION_ID\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/import/confirm/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "import", "confirm"]
+            }
+          }
+        },
+        {
+          "name": "Exportar Productos (Excel)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/products/export/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "products", "export"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "👥 Sellers",
+      "item": [
+        {
+          "name": "Listar Sellers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/sellers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "sellers"]
+            }
+          }
+        },
+        {
+          "name": "Crear Seller",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Frávega\",\n  \"description\": \"Tienda física + e-commerce\",\n  \"website\": \"https://www.fravega.com\",\n  \"contact_email\": \"ventas@fravega.com\",\n  \"phone\": \"+54 11 4000-0000\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/sellers/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "sellers"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar Seller",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contact_email\": \"newemail@fravega.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/sellers/REEMPLAZAR_CON_SELLER_ID/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "sellers", "REEMPLAZAR_CON_SELLER_ID"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar Seller",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/sellers/REEMPLAZAR_CON_SELLER_ID/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "sellers", "REEMPLAZAR_CON_SELLER_ID"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏷️ Marcas",
+      "item": [
+        {
+          "name": "Listar Marcas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/brands/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "brands"]
+            }
+          }
+        },
+        {
+          "name": "Crear Marca",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"LG Electronics\",\n  \"description\": \"Fabricante de electrónica\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/brands/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "brands"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "📂 Categorías",
+      "item": [
+        {
+          "name": "Listar Categorías",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/categories/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "categories"]
+            }
+          }
+        },
+        {
+          "name": "Crear Categoría",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Tablets\",\n  \"description\": \"Tablets y dispositivos portátiles\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/categories/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "categories"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "🌐 Canales",
+      "item": [
+        {
+          "name": "Listar Canales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/channels/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "channels"]
+            }
+          }
+        },
+        {
+          "name": "Crear Canal",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mercado Libre\",\n  \"url\": \"https://mercadolibre.com.ar\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/channels/",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "channels"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "refresh_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
